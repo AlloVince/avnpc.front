@@ -1,4 +1,7 @@
 {
+  "presets": [
+    "next/babel"
+  ],
   "plugins": [
     [
       "module-resolver",
@@ -20,10 +23,14 @@
           "less$"
         ]
       }
+    ],
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": false
+      }
     ]
-  ],
-  "presets": [
-    "next/babel"
   ],
   "ignore": []
 }

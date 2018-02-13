@@ -6,10 +6,7 @@ import 'react';
 // using the withRouter utility.
 
 const ActiveLink = ({ children, router, href }) => {
-  const style = {
-    marginRight: 10,
-    color: router.pathname === href ? 'red' : 'black'
-  };
+  const className = router.pathname === href ? 'a' : null;
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -17,9 +14,9 @@ const ActiveLink = ({ children, router, href }) => {
   };
 
   return (
-    <a href={href} onClick={handleClick} style={style}>
+    <span onClick={handleClick} className={className}>
       {children}
-    </a>
+    </span>
   );
 };
 

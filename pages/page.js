@@ -1,6 +1,9 @@
 import React from 'react';
-import Header from '../components/Header';
+import { Layout } from 'antd';
+import BlogHeader from '../components/BlogHeader';
 import BlogPost from '../components/BlogPost';
+
+const { Content } = Layout;
 
 export default class extends React.Component {
   static async getInitialProps({ query }) {
@@ -15,10 +18,14 @@ export default class extends React.Component {
       throw new Error();
     }
     return (
-      <div>
-        <Header/>
-        <BlogPost post={post}/>
-      </div>
+      <Layout style={{ minHeight: '100vh' }}>
+        <BlogHeader title={post.title}/>
+        <Layout style={{ backgroundColor: '#FFF' }}>
+          <Content style={{ margin: '150px 20px 20px 50px', maxWidth: '900px' }}>
+            <BlogPost post={post}/>
+          </Content>
+        </Layout>
+      </Layout>
     );
   }
 }

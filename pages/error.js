@@ -1,14 +1,10 @@
-import {Component} from 'react'
-import Header from '../components/Header'
-import Router from 'next/router'
+import { Component } from 'react';
+import Exception from 'ant-design-pro/lib/Exception';
 
 export default class extends Component {
-  render () {
+  render() {
     return (
-      <div>
-        <Header />
-        <p>This path({Router.pathname}) should not be rendered via SSR</p>
-      </div>
-    )
+      <Exception type="404"/>
+    );
   }
 }

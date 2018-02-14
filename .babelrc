@@ -4,6 +4,19 @@
   ],
   "plugins": [
     [
+      "transform-assets",
+      {
+        "extensions": [
+          "txt",
+          "svg",
+          "png",
+          "ico"
+        ],
+        "regExp": ".*/static/(.+)",
+        "name": "/static/[1]?[sha512:hash:base64:7]"
+      }
+    ],
+    [
       "module-resolver",
       {
         "root": [
@@ -32,5 +45,6 @@
       }
     ]
   ],
-  "ignore": []
+  "ignore": [],
+  "sourceMaps": true
 }

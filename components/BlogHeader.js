@@ -5,16 +5,12 @@ import AntdCss from 'antd/dist/antd.css';
 import AntdProCss from 'ant-design-pro/dist/ant-design-pro.css';
 import { Link } from '../routes';
 import ActiveLink from './ActiveLink';
-import BlogCss from '../styles/blog.css';
+import BlogCss from '../styles/blog.styl';
+import favicon from '../static/favicon.ico';
 
 const { Sider } = Layout;
-const { SubMenu } = Menu;
 
 export default class extends React.Component {
-  state = {
-    collapsed: false
-  };
-
   onCollapse = (collapsed, type) => {
     this.setState({ collapsed });
   };
@@ -30,14 +26,17 @@ export default class extends React.Component {
         breakpoint="lg"
         collapsedWidth="0"
         // style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}
+        style={{ minHeight: '100vh' }}
       >
         <Head>
           <title>{this.props.title}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
           <meta charSet="utf-8"/>
+          <link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>
+          {/*<link href={favicon} type="image/x-icon" rel="shortcut icon"/>*/}
           <style dangerouslySetInnerHTML={{ __html: AntdCss }}/>
           <style dangerouslySetInnerHTML={{ __html: AntdProCss }}/>
-          <style dangerouslySetInnerHTML={{ __html: BlogCss }}/>
+          <style>{BlogCss}</style>
         </Head>
         <div className="logo">
           <h1><Link route="index"><a>Just Fine</a></Link></h1>

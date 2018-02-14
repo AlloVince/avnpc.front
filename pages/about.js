@@ -1,9 +1,8 @@
 import Page from './page';
+import HttpClient from '../services/http_client';
 
 export default class extends Page {
   static async getInitialProps({ query }) {
-    const response = await fetch(`http://localhost:3001/v1/blog/posts/about`);
-    const json = await response.json();
-    return { post: json };
+    return { post: await HttpClient.requestRestAPI(`http://localhost:3001/v1/blog/posts/about`), query };
   }
 }

@@ -18,7 +18,7 @@ export default class extends React.Component {
     }
     return (
       <Layout>
-        <BlogHeader/>
+        <BlogHeader title={post.title}/>
         <Layout>
           <Content>
             <div id="page" className="page">

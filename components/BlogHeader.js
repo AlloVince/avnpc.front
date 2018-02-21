@@ -1,12 +1,11 @@
 import Head from 'next/head';
 import { Layout, Menu, Icon } from 'antd';
 import React from 'react';
-import AntdCss from 'antd/dist/antd.css';
-import AntdProCss from 'ant-design-pro/dist/ant-design-pro.css';
+import AntdCss from '../antd-custom/index.css';
 import { Link } from '../routes';
 import ActiveLink from './ActiveLink';
-import BlogCss from '../styles/blog.styl';
-import favicon from '../static/favicon.ico';
+import BlogCss from '../styls/blog.styl';
+// import favicon from '../static/favicon.ico';
 
 const { Sider } = Layout;
 
@@ -32,10 +31,10 @@ export default class extends React.Component {
           <title>{this.props.title}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
           <meta charSet="utf-8"/>
-          <link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>
+          {/*<link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>*/}
           {/*<link href={favicon} type="image/x-icon" rel="shortcut icon"/>*/}
           <style dangerouslySetInnerHTML={{ __html: AntdCss }}/>
-          <style dangerouslySetInnerHTML={{ __html: AntdProCss }}/>
+          {/*<style dangerouslySetInnerHTML={{ __html: AntdProCss }}/>*/}
           <style>{BlogCss}</style>
         </Head>
         <div className="logo">

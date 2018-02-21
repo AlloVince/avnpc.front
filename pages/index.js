@@ -26,7 +26,7 @@ export default class extends React.Component {
 
     return (
       <Layout>
-        <BlogHeader/>
+        <BlogHeader title={`AVNPC - ${offset} to ${offset + limit} of ${total}`}/>
         <Layout>
           <Content>
             <div id="page" className="page">

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Layout } from 'antd';
-// import Exception from 'ant-design-pro/lib/Exception';
 import BlogHeader from '../components/BlogHeader';
 
 const { Content } = Layout;
@@ -8,7 +7,6 @@ const { Content } = Layout;
 export default class extends React.Component {
   static getInitialProps({ res, xhr }) {
     const statusCode = res ? res.statusCode : (xhr ? xhr.status : null);
-    console.log(statusCode)
     return { statusCode };
   }
 
@@ -18,7 +16,7 @@ export default class extends React.Component {
         <BlogHeader/>
         <Layout>
           <Content>
-            {/*<Exception type="404"/>*/}
+            { this.props.statusCode }
           </Content>
         </Layout>
       </Layout>

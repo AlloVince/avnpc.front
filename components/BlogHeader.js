@@ -25,19 +25,19 @@ export default class extends React.Component {
         breakpoint="lg"
         collapsedWidth="0"
         // style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}
-        style={{ minHeight: '100vh' }}
+        style={{ minHeight: '100vh', position: 'fixed' }}
       >
         <Head>
           <title>{this.props.title}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
           <meta charSet="utf-8"/>
-          {/*<link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>*/}
+          <link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>
           {/*<link href={favicon} type="image/x-icon" rel="shortcut icon"/>*/}
-          <style dangerouslySetInnerHTML={{ __html: AntdCss }}/>
+          <style key="antdCss" dangerouslySetInnerHTML={{ __html: AntdCss }}/>
           {/*<style dangerouslySetInnerHTML={{ __html: AntdProCss }}/>*/}
-          <style>{BlogCss}</style>
+          <style key="blogCss">{BlogCss}</style>
         </Head>
-        <div className="logo">
+        <div id="logo" className="logo">
           <h1><Link route="index"><a>Just Fine</a></Link></h1>
           <p>— Story of AlloVince</p>
         </div>

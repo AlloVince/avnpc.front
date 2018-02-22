@@ -6,6 +6,10 @@ const path = require('path');
 module.exports = {
   webpack: (config, { dev }) => {
     config.module.rules.push(
+      {
+        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+        loader: 'url-loader'
+      },
       // {
       //   test: /\.(js|jsx)$/,
       //   use: [
@@ -16,8 +20,12 @@ module.exports = {
       //   exclude: /node_modules/
       // },
       {
+        test: /\.styl$/,
+        use: ['raw-loader', 'postcss-loader'],
+      },
+      {
         test: /\.css$/,
-        use: ['raw-loader']
+        use: ['raw-loader', 'css-loader'],
       },
       // {
       //   test: /\.less$/,
@@ -31,10 +39,6 @@ module.exports = {
       //   path.resolve(__dirname, '/node_modules/antd'),
       // ]
       // },
-      {
-        test: /\.styl$/,
-        use: ['raw-loader', 'postcss-loader'],
-      },
       {
         test: /\.ico$/,
         loader: 'file-loader'

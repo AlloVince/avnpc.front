@@ -27,7 +27,7 @@ export default class extends React.Component {
     return (
       <Layout>
         <BlogHeader title={`AVNPC - ${offset} to ${offset + limit} of ${total}`}/>
-        <Layout>
+        <Layout style={{ marginLeft: 200 }}>
           <Content>
             <div id="page" className="page">
               <div className="page-inner">
@@ -36,7 +36,7 @@ export default class extends React.Component {
                     <div className="item-inline item-title">
                       <h2>
                         <Link
-                          key={`p${post.id}`}
+                          key={`post-${post.id}`}
                           route="page"
                           params={{ slug: post.slug }}>
                           <a href="#">{post.title}</a>

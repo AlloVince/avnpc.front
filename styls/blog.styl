@@ -1,3 +1,23 @@
+/* sarina-regular - latin */
+@font-face {
+    font-family: 'Sarina';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Sarina'), local('Sarina-Regular'),
+    url('/static/fonts/sarina-v6-latin-regular.woff2') format('woff2'),
+    url('/static/fonts/sarina-v6-latin-regular.woff') format('woff');
+}
+
+/* great-vibes-regular - latin */
+@font-face {
+    font-family: 'Great Vibes';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Great Vibes'), local('GreatVibes-Regular'),
+    url('/static/fonts/great-vibes-v5-latin-regular.woff2') format('woff2'),
+    url('/static/fonts/great-vibes-v5-latin-regular.woff') format('woff');
+}
+
 #page {
     background: #FFF;
     padding: 100px 80px;
@@ -5,4 +25,24 @@
 
 .page-inner {
     max-width: 1000px;
+}
+
+#logo {
+    padding: 50px 20px 0 20px;
+}
+
+#logo h1 {
+    font-size: 1.7em;
+}
+
+#logo h1 a {
+    color: #FFFFFF;
+    font-weight: 300;
+    font-family: Sarina, Serif;
+}
+
+#logo p {
+    text-align: right;
+    color: #FFFFFF;
+    font-family: Great Vibes, Serif;
 }

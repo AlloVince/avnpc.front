@@ -1,7 +1,4 @@
 const path = require('path');
-// const withLess = require('@zeit/next-less');
-// const withCSS = require('@zeit/next-css');
-
 
 module.exports = {
   webpack: (config, { dev }) => {
@@ -10,22 +7,15 @@ module.exports = {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
         loader: 'url-loader'
       },
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   use: [
-      //     {
-      //       loader: 'babel-loader'
-      //     }
-      //   ],
-      //   exclude: /node_modules/
-      // },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'css-loader' }
+        ]
+      },
       {
         test: /\.styl$/,
         use: ['raw-loader', 'postcss-loader'],
-      },
-      {
-        test: /\.css$/,
-        use: ['raw-loader', 'css-loader'],
       },
       // {
       //   test: /\.less$/,
@@ -45,8 +35,8 @@ module.exports = {
       },
     );
 
-    console.log('Next.js webpack module rules config:');
-    config.module.rules.forEach(rule => console.dir(rule));
+    // console.log('Next.js webpack module rules config:');
+    // config.module.rules.forEach(rule => console.dir(rule));
     return config;
   }
 };

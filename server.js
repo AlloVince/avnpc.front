@@ -15,6 +15,7 @@ const engine = new EvaEngine({
 engine.bootstrap();
 const expressApp = EvaEngine.getApp();
 
+// console.log('---------hotReloader config', app.hotReloader.config);
 app
   .prepare()
   .then(() => {
@@ -29,5 +30,7 @@ app
     expressApp.get('*', (req, res) => {
       return handler(req, res);
     });
+    // console.log('---------hotReloader stats', app.hotReloader.stats);
     server.listen(port);
+
   });

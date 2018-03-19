@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { Layout, Menu, Icon } from 'antd';
 import React from 'react';
-import AntdCss from '../antd-custom/index.css';
+// import AntdCss from '../antd-custom/index.css';
+import AntdCss from '../styls/antd.less';
 import { Link } from '../routes';
 import ActiveLink from './ActiveLink';
 import BlogCss from '../styls/blog.styl';

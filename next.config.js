@@ -17,18 +17,18 @@ module.exports = {
         test: /\.styl$/,
         use: ['raw-loader', 'postcss-loader'],
       },
-      // {
-      //   test: /\.less$/,
-      //   use: [
-      //     { loader: 'raw-loader' },
-      //     { loader: 'css-loader' },
-      // { loader: 'less-loader' },
-      // ],
-      // include: [
-      //   path.resolve(__dirname, 'pages'),
-      //   path.resolve(__dirname, '/node_modules/antd'),
-      // ]
-      // },
+      {
+        test: /\.less$/,
+        use: [
+          { loader: 'css-loader' },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true
+            }
+          }
+        ]
+      },
       {
         test: /\.ico$/,
         loader: 'file-loader'

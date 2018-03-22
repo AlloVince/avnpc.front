@@ -1,7 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
-import hljs from 'highlight.js/lib/index';
-import hljsCss from 'highlight.js/styles/dark.css';
+import hljsCss from '../styls/dark.css';
 import BlogHeader from '../components/BlogHeader';
 import BlogPost from '../components/BlogPost';
 import HttpClient from '../services/http_client';
@@ -14,9 +13,9 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    console.log('After render');
-    hljs.initHighlighting.called = false;
-    hljs.initHighlighting();
+    // console.log('After render');
+    // hljs.initHighlighting.called = false;
+    // hljs.initHighlighting();
   }
 
   render() {

@@ -1,4 +1,6 @@
-import 'gitalk/dist/gitalk.css';
+import Head from 'next/head';
+import GitalkCss from 'gitalk/dist/gitalk.css';
+import KatexCss from 'katex/dist/katex.css';
 import React from 'react';
 import { Link } from '../routes';
 import markdown from '../markdown';
@@ -8,12 +10,39 @@ export default class extends React.Component {
     post: {}
   };
 
+
+  componentDidMount() {
+    const gitalkLib = document.createElement('script');
+    gitalkLib.src = 'https://unpkg.com/gitalk@latest/dist/gitalk.min.js';
+    gitalkLib.onload = () => {
+      const script = document.createElement('script');
+      script.text = `
+    (new Gitalk({
+      clientID: '5d9637564dd639b523c6',
+      clientSecret: '8946007888a18d7c4bd4bef28128866394ff86b8',
+      repo: 'avnpc.content',
+      owner: 'AlloVince',
+      admin: ['AlloVince'],
+      id: 'POST_${this.props.post.id}',
+      distractionFreeMode: false
+    })).render('gitalk-container');
+    `;
+      document.body.appendChild(script);
+    };
+
+    document.body.appendChild(gitalkLib);
+  }
+
   render() {
     const { post } = this.props;
     const content = markdown().render(post.text.content);
     // const content = post.text.markedContent;
     return (
       <div className="page-content">
+        <Head>
+          <style key="GitalkCss">{GitalkCss}</style>
+          <style key="KatexCss">{KatexCss}</style>
+        </Head>
         <div id="blog">
           <div className="page-header large">
             <h1>
@@ -81,36 +110,10 @@ export default class extends React.Component {
                 : null;
             }}
 
-            <hr/>
-            <div id="disqus_thread"></div>
-            <div id="gitalk-container"></div>
-
-            <script dangerouslySetInnerHTML={{
-              __html: `
-            // (function() { var d = document, s = d.createElement('script'); s.src = 'https://avnpc.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s);})();
-                  `
-            }}/>
-            <link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css"/>
-
-            <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
-
-            <script type="text/javascript" dangerouslySetInnerHTML={{
-              __html: `
-              const gitalk = new Gitalk({
-                    clientID: '5d9637564dd639b523c6',
-                    clientSecret: '8946007888a18d7c4bd4bef28128866394ff86b8',
-                    repo: 'avnpc.content',
-                    owner: 'AlloVince',
-                    admin: ['AlloVince'],
-                    id: 'POST_${post.id}',
-                    distractionFreeMode: false
-                  });
-                  setTimeout(() => { gitalk.render('gitalk-container')}, 2000);
-                  `
-            }}/>
-
           </article>
 
+          <hr/>
+          <div id="gitalk-container"></div>
           {/*<?if($item['Prev'] || $item['Next']):?>*/}
           {/*<div className="neighbors">*/}
           {/*<?if($item['Prev']):?>*/}

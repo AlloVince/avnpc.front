@@ -19,6 +19,7 @@ export default class extends React.Component {
     title: 'Just Fine'
   };
 
+
   render() {
     return (
       <Sider
@@ -34,7 +35,7 @@ export default class extends React.Component {
           <meta charSet="utf-8"/>
           <link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>
           {/*<link href={favicon} type="image/x-icon" rel="shortcut icon"/>*/}
-          <style key="antdCss" dangerouslySetInnerHTML={{ __html: AntdCss }}/>
+          <style key="antdCss">{AntdCss}</style>
           {/*<style dangerouslySetInnerHTML={{ __html: AntdProCss }}/>*/}
           <style key="blogCss">{BlogCss}</style>
         </Head>

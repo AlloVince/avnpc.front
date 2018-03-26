@@ -5,42 +5,38 @@ import markdownitFootnote from 'markdown-it-footnote';
 import markdownitSub from 'markdown-it-sub';
 import markdownitSup from 'markdown-it-sup';
 import markdownitKatex from 'markdown-it-katex';
-import mermaid, { mermaidAPI } from 'mermaid';
 import hljs from 'highlight.js/lib/index';
+// import puppeteer from 'puppeteer';
+// import path from 'path';
+//
+// const getMermaidGraph = async (definition) => {
+//   const mermaidConfig = { theme: 'default' };
+//   const browser = await puppeteer.launch({});
+//   const page = await browser.newPage();
+//   page.setViewport({ width: 800, height: 600 });
+//   await page.goto(`file://${path.join(__dirname, 'index.html')}`);
+//   await page.evaluate(`document.body.style.background = 'white'`);
+//
+//   await page.$eval('#container', (container) => {
+//     container.innerHTML = definition;
+//     window.mermaid.initialize(mermaidConfig);
+//     window.mermaid.init(undefined, container);
+//   });
+//
+//   const svg = await page.$eval('#container', container => container.innerHTML);
+//   browser.close();
+//   return svg;
+// };
 
 const mermaidChart = (code) => {
   try {
-    return mermaidAPI.render(`mermaid-${Math.floor(Math.random() * Math.floor(100000000000))}`, code);
+    return `<div class="mermaid">${code}</div>`;
   } catch ({ str, hash }) {
     return `<pre>${str}</pre>`;
   }
 };
 
 const markdownitMermaid = (md) => {
-  Object.assign(md, { mermaid });
-  mermaid.loadPreferences = (preferenceStore) => {
-    let mermaidTheme = preferenceStore.get('mermaid-theme');
-    if (mermaidTheme === undefined) {
-      mermaidTheme = 'default';
-    }
-    let ganttAxisFormat = preferenceStore.get('gantt-axis-format');
-    if (ganttAxisFormat === undefined) {
-      ganttAxisFormat = '%Y-%m-%d';
-    }
-    mermaid.initialize({
-      theme: mermaidTheme,
-      gantt: {
-        axisFormatter: [
-          [ganttAxisFormat, d => d.getDay() === 1]
-        ]
-      }
-    });
-    return {
-      'mermaid-theme': mermaidTheme,
-      'gantt-axis-format': ganttAxisFormat
-    };
-  };
-
   const temp = md.renderer.rules.fence.bind(md.renderer.rules);
   Object.assign(md.renderer.rules, {
     fence: (tokens, idx, options, env, slf) => {

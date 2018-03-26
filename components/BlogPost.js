@@ -12,9 +12,9 @@ export default class extends React.Component {
 
 
   componentDidMount() {
-    const gitalkLib = document.createElement('script');
-    gitalkLib.src = 'https://unpkg.com/gitalk@latest/dist/gitalk.min.js';
-    gitalkLib.onload = () => {
+    const gitalkLibId = 'gitalk_lib';
+    const gitalkPostId = `POST_${this.props.post.id}`;
+    const renderGitalk = () => {
       const script = document.createElement('script');
       script.text = `
     (new Gitalk({
@@ -23,14 +23,40 @@ export default class extends React.Component {
       repo: 'avnpc.content',
       owner: 'AlloVince',
       admin: ['AlloVince'],
-      id: 'POST_${this.props.post.id}',
+      id: '${gitalkPostId}',
       distractionFreeMode: false
     })).render('gitalk-container');
     `;
       document.body.appendChild(script);
     };
 
-    document.body.appendChild(gitalkLib);
+    if (document.getElementById(gitalkLibId)) {
+      renderGitalk();
+    } else {
+      const gitalkLib = document.createElement('script');
+      gitalkLib.id = gitalkLibId;
+      gitalkLib.src = 'https://unpkg.com/gitalk@latest/dist/gitalk.min.js';
+      gitalkLib.onload = renderGitalk;
+      document.body.appendChild(gitalkLib);
+    }
+
+    const mermaidLibId = 'mermaid_lib';
+    const renderMermaid = () => {
+      const script = document.createElement('script');
+      script.text = `
+      mermaid.init({}, ".mermaid");
+    `;
+      document.body.appendChild(script);
+    };
+    if (document.getElementById(mermaidLibId)) {
+      renderMermaid();
+    } else {
+      const mermaidLib = document.createElement('script');
+      mermaidLib.id = gitalkLibId;
+      mermaidLib.src = 'https://unpkg.com/mermaid@8.0.0-rc.6/dist/mermaid.min.js';
+      mermaidLib.onload = renderMermaid;
+      document.body.appendChild(mermaidLib);
+    }
   }
 
   render() {

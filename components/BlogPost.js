@@ -2,8 +2,11 @@ import Head from 'next/head';
 import GitalkCss from 'gitalk/dist/gitalk.css';
 import KatexCss from 'katex/dist/katex.css';
 import React from 'react';
-import { Link } from '../routes';
+import { Button, Icon, Divider, BackTop } from 'antd';
+import Link from 'next/link';
 import markdown from '../markdown';
+
+const ButtonGroup = Button.Group;
 
 export default class extends React.Component {
   props = {
@@ -96,7 +99,7 @@ export default class extends React.Component {
 
 
           </p>
-          <article className="typo typocn">
+          <article className="markdown">
             <div dangerouslySetInnerHTML={{ __html: content }}/>
             {() => {
               return post.tags.length > 0 ?
@@ -109,7 +112,7 @@ export default class extends React.Component {
                       );
                     })}
                   </p>
-                  < p className="share"> Follow :
+                  <p className="share"> Follow :
                     <span data-url-wrap="http://avnpc.com/feed/"><i className="icon-social-rss"></i></span>
                     <span data-url-wrap="https://github.com/AlloVince"><i
                       className="icon-social-github-circled"></i></span>
@@ -138,29 +141,28 @@ export default class extends React.Component {
 
           </article>
 
-          <hr/>
+          <Divider/>
+
+          <div style={{ textAlign: 'center' }}>
+            <ButtonGroup>
+              <Button type="dashed" size="large" disabled={post.prev ? '' : 'disabled'} title={post.prev ? `${post.prev.title}` : ''}>
+                <Icon type="left"/>
+                <Link href={post.prev ? `/pages/${post.prev.slug}` : 'javascript:;'}>
+                  上一篇
+                </Link>
+              </Button>
+              <Button type="dashed" size="large" disabled={post.next ? '' : 'disabled'} title={post.next ? `${post.next.title}` : ''}>
+                <Link href={post.next ? `/pages/${post.next.slug}` : 'javascript:;'}>
+                  下一篇
+                </Link>
+                <Icon type="right"/>
+              </Button>
+            </ButtonGroup>
+          </div>
+
           <div id="gitalk-container"></div>
-          {/*<?if($item['Prev'] || $item['Next']):?>*/}
-          {/*<div className="neighbors">*/}
-          {/*<?if($item['Prev']):?>*/}
-          {/*<a href="<?=$this->uri('/pages/' . $item['Prev']['urlName'])?>" className="prev"*/}
-          {/*title="<?=$this->escapeHtmlAttr($item['Prev']['title'])?>"><span className="icon-ext icon-arrow-left"></span></a>*/}
-          {/*<?else:?>*/}
-          {/*<a href="#" className="prev" title="没有了"><span className="icon-ext icon-arrow-left"></a>*/}
-          {/*<?endif;?>*/}
-          {/*<div className="postdate">*/}
-          {/*<abbr className="gmtdate" title="本篇日志发布于：<?=$this->datetime($item['createTime']);?>">*/}
-          {/*<span className="month"><?=$this->datetime($item['createTime'], null, 'M');?></span>*/}
-          {/*<span className="day"><?=$this->datetime($item['createTime'], null, 'd');?></span>*/}
-          {/*</abbr>*/}
-          {/*</div>*/}
-          {/*<?if($item['Next']):?>*/}
-          {/*<a href="<?=$this->uri('/pages/' . $item['Next']['urlName'])?>" className="next"*/}
-          {/*title="<?=$this->escapeHtmlAttr($item['Next']['title'])?>"><span*/}
-          {/*className="icon-ext icon-arrow-right"></span></a>*/}
-          {/*<?endif;?>*/}
-          {/*</div>*/}
-          {/*<?endif;?>*/}
+
+          <BackTop/>
         </div>
       </div>
     );

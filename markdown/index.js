@@ -6,27 +6,6 @@ import markdownitSub from 'markdown-it-sub';
 import markdownitSup from 'markdown-it-sup';
 import markdownitKatex from 'markdown-it-katex';
 import hljs from 'highlight.js/lib/index';
-// import puppeteer from 'puppeteer';
-// import path from 'path';
-//
-// const getMermaidGraph = async (definition) => {
-//   const mermaidConfig = { theme: 'default' };
-//   const browser = await puppeteer.launch({});
-//   const page = await browser.newPage();
-//   page.setViewport({ width: 800, height: 600 });
-//   await page.goto(`file://${path.join(__dirname, 'index.html')}`);
-//   await page.evaluate(`document.body.style.background = 'white'`);
-//
-//   await page.$eval('#container', (container) => {
-//     container.innerHTML = definition;
-//     window.mermaid.initialize(mermaidConfig);
-//     window.mermaid.init(undefined, container);
-//   });
-//
-//   const svg = await page.$eval('#container', container => container.innerHTML);
-//   browser.close();
-//   return svg;
-// };
 
 const mermaidChart = (code) => {
   try {

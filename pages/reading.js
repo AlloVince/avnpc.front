@@ -12,7 +12,7 @@ const { Content } = Layout;
 export default class extends React.Component {
   static async getInitialProps({ query }) {
     const { offset, limit } = query;
-    return await HttpClient.requestRestAPI(`http://localhost:3001/v1/blog/posts?${querystring.stringify({
+    return HttpClient.requestRestAPI(`http://localhost:3001/v1/evernote/notes?${querystring.stringify({
       offset,
       limit
     })}`);
@@ -21,7 +21,7 @@ export default class extends React.Component {
   render() {
     const { results: posts, pagination: { limit, offset, total } } = this.props;
     const onChange = (page) => {
-      Router.pushRoute('thinking', { offset: (page - 1) * limit, limit });
+      Router.pushRoute('reading', { offset: (page - 1) * limit, limit });
     };
 
     return (
@@ -36,8 +36,8 @@ export default class extends React.Component {
                     <div className="item-inline item-title">
                       <h2>
                         <Link
-                          key={`post-${post.id}`}
-                          route="page"
+                          key={`note-${post.id}`}
+                          route="note"
                           params={{ slug: post.slug }}>
                           <a href="#">{post.title}</a>
                         </Link>

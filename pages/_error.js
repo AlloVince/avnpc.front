@@ -14,9 +14,9 @@ export default class extends React.Component {
     return (
       <Layout>
         <BlogHeader/>
-        <Layout style={{ marginLeft: 200 }}>
+        <Layout id="main">
           <Content>
-            { this.props.statusCode }
+            {this.props.statusCode}
           </Content>
         </Layout>
       </Layout>

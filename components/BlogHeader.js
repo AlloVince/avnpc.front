@@ -6,7 +6,6 @@ import AntdCss from '../styls/antd.less';
 import { Link } from '../routes';
 import ActiveLink from './ActiveLink';
 import BlogCss from '../styls/blog.styl';
-// import favicon from '../static/favicon.ico';
 
 const { Sider } = Layout;
 
@@ -34,9 +33,7 @@ export default class extends React.Component {
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
           <meta charSet="utf-8"/>
           <link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>
-          {/*<link href={favicon} type="image/x-icon" rel="shortcut icon"/>*/}
           <style key="antdCss">{AntdCss}</style>
-          {/*<style dangerouslySetInnerHTML={{ __html: AntdProCss }}/>*/}
           <style key="blogCss">{BlogCss}</style>
         </Head>
         <div id="logo" className="logo">
@@ -50,7 +47,7 @@ export default class extends React.Component {
           </Menu.Item>
           <Menu.Item key="2">
             <Icon type="verticle-right"/>
-            <ActiveLink href="/pages">Projects</ActiveLink>
+            <ActiveLink href="/reading">Reading</ActiveLink>
           </Menu.Item>
           <Menu.Item key="3">
             <Icon type="minus-square-o"/>

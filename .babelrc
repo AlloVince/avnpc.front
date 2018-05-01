@@ -5,9 +5,9 @@
 //    "env"
   ],
   "plugins": [
-    "transform-object-rest-spread",
+//    "transform-object-rest-spread",
     "transform-class-properties",
-    "styled-jsx/babel"
+//    "styled-jsx/babel"
 
 //    [
 //      "transform-assets",

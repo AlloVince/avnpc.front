@@ -9,7 +9,7 @@ const { Content } = Layout;
 
 export default class extends React.Component {
   static async getInitialProps({ query }) {
-    return { post: await HttpClient.requestRestAPI(`http://localhost:3001/v1/blog/posts/${query.slug}`), query };
+    return { post: await HttpClient.requestRestAPI(`${process.env.BACKEND_URL}/v1/blog/posts/${query.slug}`), query };
   }
 
   render() {

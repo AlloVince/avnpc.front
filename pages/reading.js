@@ -12,7 +12,7 @@ const { Content } = Layout;
 export default class extends React.Component {
   static async getInitialProps({ query }) {
     const { offset, limit } = query;
-    return HttpClient.requestRestAPI(`http://localhost:3001/v1/evernote/notes?${querystring.stringify({
+    return HttpClient.requestRestAPI(`${process.env.BACKEND_URL}/v1/evernote/notes?${querystring.stringify({
       offset,
       limit
     })}`);

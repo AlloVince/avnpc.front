@@ -1,56 +1,19 @@
 {
   "presets": [
-     "next/babel"
-//    "react",
-//    "env"
+    "next/babel"
   ],
   "plugins": [
-//    "transform-object-rest-spread",
-    "transform-class-properties",
-//    "styled-jsx/babel"
-
-//    [
-//      "transform-assets",
-//      {
-//        "extensions": [
-//          "txt",
-//          "svg",
-//          "png",
-//          "ico"
-//        ],
-//        "regExp": ".*/static/(.+)",
-//        "name": "/static/[1]?[sha512:hash:base64:7]"
-//      }
-//    ],
-//    [
-//      "module-resolver",
-//      {
-//        "root": [
-//          "."
-//        ],
-//        "alias": {
-//          "styles": "./styles"
-//        },
-//        "cwd": "babelrc"
-//      }
-//    ],
-//    [
-//      "wrap-in-js",
-//      {
-//        "extensions": [
-//          "css$",
-//          "less$"
-//        ]
-//      }
-//    ],
-//    [
-//      "import",
-//      {
-//        "libraryName": "antd",
-//        "style": false
-//      }
-//    ]
+    [
+      "transform-class-properties"
+    ],
+    [
+      "transform-define",
+      {
+        "process.env.BACKEND_URL": "http://localhost:3001",
+        "process.env.FRONTEND_URL": "http://localhost:3000"
+      }
+    ]
   ],
   "ignore": [],
-  "sourceMaps": true
+  "sourceMaps": false
 }

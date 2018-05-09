@@ -12,7 +12,7 @@ const { Content } = Layout;
 export default class extends React.Component {
   static async getInitialProps({ query }) {
     const { offset, limit } = query;
-    return await HttpClient.requestRestAPI(`http://localhost:3001/v1/blog/posts?${querystring.stringify({
+    return await HttpClient.requestRestAPI(`${process.env.BACKEND_URL}/v1/blog/posts?${querystring.stringify({
       offset,
       limit
     })}`);

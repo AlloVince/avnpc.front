@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import { Layout, Menu, Icon } from 'antd';
+import { withRouter } from 'next/router';
+import { Layout, Menu } from 'antd';
 import React from 'react';
-// import AntdCss from '../antd-custom/index.css';
 import AntdCss from '../styls/antd.less';
 import { Link } from '../routes';
 import ActiveLink from './ActiveLink';
@@ -9,7 +9,7 @@ import BlogCss from '../styls/blog.styl';
 
 const { Sider } = Layout;
 
-export default class extends React.Component {
+class BlogHeader extends React.Component {
   onCollapse = (collapsed, type) => {
     this.setState({ collapsed });
   };
@@ -25,7 +25,6 @@ export default class extends React.Component {
         onCollapse={this.onCollapse}
         breakpoint="lg"
         collapsedWidth="0"
-        // style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}
         style={{ minHeight: '100vh', position: 'fixed' }}
       >
         <Head>
@@ -40,21 +39,21 @@ export default class extends React.Component {
           <h1><Link route="index"><a>Just Fine</a></Link></h1>
           <p>— Story of AlloVince</p>
         </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-          <Menu.Item key="1">
-            <Icon type="book"/>
-            <ActiveLink href="/">Thinking</ActiveLink>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={this.props.router.pathname}>
+          <Menu.Item key="/thinking">
+            <ActiveLink href="/thinking" icon="code-o">Thinking</ActiveLink>
           </Menu.Item>
-          <Menu.Item key="2">
-            <Icon type="verticle-right"/>
-            <ActiveLink href="/reading">Reading</ActiveLink>
+          <Menu.Item key="/reading">
+            <ActiveLink href="/reading" icon="book">Reading</ActiveLink>
           </Menu.Item>
-          <Menu.Item key="3">
-            <Icon type="minus-square-o"/>
-            <ActiveLink href="/about">About</ActiveLink>
+          <Menu.Item key="/about">
+            <ActiveLink href="/about" icon="user">About</ActiveLink>
           </Menu.Item>
         </Menu>
       </Sider>
     );
   }
 }
+
+export default withRouter(BlogHeader);
+

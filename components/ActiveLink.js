@@ -1,22 +1,19 @@
 import { withRouter } from 'next/router';
+import { Icon } from 'antd';
 import 'react';
 
-// typically you want to use `next/link` for this usecase
-// but this example shows how you can also access the router
-// using the withRouter utility.
-
-const ActiveLink = ({ children, router, href }) => {
-  const className = router.pathname === href ? 'a' : null;
+const ActiveLink = ({ children, router, href, icon }) => {
+  const className = router.pathname === href ? 'active' : null;
 
   const handleClick = (e) => {
-    e.preventDefault();
     router.push(href);
   };
 
   return (
-    <span onClick={handleClick} className={className}>
+    <div onClick={handleClick} className={className}>
+      <Icon type={icon}/>
       {children}
-    </span>
+    </div>
   );
 };
 

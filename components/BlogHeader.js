@@ -10,14 +10,9 @@ import BlogCss from '../styls/blog.styl';
 const { Sider } = Layout;
 
 class BlogHeader extends React.Component {
-  onCollapse = (collapsed, type) => {
-    this.setState({ collapsed });
-  };
-
-  props = {
+  static defaultProps = {
     title: 'Just Fine'
   };
-
 
   render() {
     return (
@@ -39,7 +34,7 @@ class BlogHeader extends React.Component {
           <h1><Link route="index"><a>Just Fine</a></Link></h1>
           <p>— Story of AlloVince</p>
         </div>
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={this.props.router.pathname}>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={[this.props.router.pathname]}>
           <Menu.Item key="/thinking">
             <ActiveLink href="/thinking" icon="code-o">Thinking</ActiveLink>
           </Menu.Item>

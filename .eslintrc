@@ -7,6 +7,9 @@
     "fetch": true
   },
   "rules": {
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-tag-spacing": 0,
+    "react/jsx-filename-extension": 0,
     "class-methods-use-this": [
       0
     ],

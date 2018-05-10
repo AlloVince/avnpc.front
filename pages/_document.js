@@ -11,12 +11,12 @@ export default class Document extends Document_ {
 
   render () {
     return (
-      <html>
+      <html lang="en">
         <Head />
         <body>
           <Main />
           <script
-            dangerouslySetInnerHTML={{ __html: '__ENV__ = ' + htmlescape({ NODE_ENV }) }}
+            dangerouslySetInnerHTML={{ __html: `__ENV__ = ${htmlescape({ NODE_ENV })}` }}
           />
           <NextScript />
         </body>

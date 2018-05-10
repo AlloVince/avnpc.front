@@ -26,17 +26,16 @@ export default class extends React.Component {
 
     return (
       <Layout>
-        <BlogHeader title={`AVNPC - ${offset} to ${offset + limit} of ${total}`}/>
+        <BlogHeader title={`Thinking - ${offset} to ${offset + limit} of ${total}`}/>
         <Layout id="main">
           <Content>
             <div id="page" className="page">
               <div className="page-inner">
                 {posts.map(post =>
-                  <div className="item">
+                  <div className="item" key={`post-${post.id}`}>
                     <div className="item-inline item-title">
                       <h2>
                         <Link
-                          key={`post-${post.id}`}
                           route="page"
                           params={{ slug: post.slug }}>
                           <a href="#">{post.title}</a>

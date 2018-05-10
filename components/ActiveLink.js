@@ -5,7 +5,7 @@ import 'react';
 const ActiveLink = ({ children, router, href, icon }) => {
   const className = router.pathname === href ? 'active' : null;
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     router.push(href);
   };
 

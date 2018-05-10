@@ -6,7 +6,6 @@ import { Link, Router } from '../routes';
 import BlogHeader from '../components/BlogHeader';
 import HttpClient from '../services/http_client';
 
-
 const { Content } = Layout;
 
 export default class extends React.Component {
@@ -26,17 +25,16 @@ export default class extends React.Component {
 
     return (
       <Layout>
-        <BlogHeader title={`AVNPC - ${offset} to ${offset + limit} of ${total}`}/>
+        <BlogHeader title={`Reading - ${offset} to ${offset + limit} of ${total}`}/>
         <Layout id="main">
           <Content>
             <div id="page" className="page">
               <div className="page-inner">
                 {posts.map(post =>
-                  <div className="item">
+                  <div className="item" key={`note-${post.id}`}>
                     <div className="item-inline item-title">
                       <h2>
                         <Link
-                          key={`note-${post.id}`}
                           route="note"
                           params={{ slug: post.slug }}>
                           <a href="#">{post.title}</a>

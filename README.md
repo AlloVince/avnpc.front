@@ -1,14 +1,7 @@
-# EvaSkeleton.js
+# avnpc.front
 
+Frontend of avnpc.com
 
-less-loader如果没有安装有可能报
+A Server-Side-Render blog theme based on Next.js / Ant.design / EvaEngine.js
 
-```
-This relative module was not found:
-
-* ./xxx.less in ./xxx.js
-```
-
-
-不要使用style-loader， 否则各种问题
-
+Backend API is [avnpc.js](https://github.com/AlloVince/avnpc.js)

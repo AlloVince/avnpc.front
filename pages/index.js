@@ -10,23 +10,33 @@ import HttpClient from '../services/http_client';
 const { Content } = Layout;
 
 export default class extends React.Component {
+  static defaultProps = {
+    posts: {},
+    query: {}
+  };
+
   static async getInitialProps({ query }) {
-    const { offset, limit } = query;
-    return await HttpClient.requestRestAPI(`${process.env.BACKEND_URL}/v1/blog/posts?${querystring.stringify({
-      offset,
-      limit
-    })}`);
+    const { offset, limit = 10, tag } = query;
+    return {
+      query,
+      posts: await HttpClient.requestRestAPI(`${process.env.BACKEND_URL}/v1/blog/posts?${querystring.stringify({
+        offset,
+        limit,
+        tag
+      })}`)
+    };
   }
 
   render() {
-    const { results: posts, pagination: { limit, offset, total } } = this.props;
+    const { results: posts, pagination: { limit, offset, total } } = this.props.posts;
+    const { tag } = this.props.query;
     const onChange = (page) => {
       Router.pushRoute('thinking', { offset: (page - 1) * limit, limit });
     };
 
     return (
       <Layout>
-        <BlogHeader title={`Thinking - ${offset} to ${offset + limit} of ${total}`}/>
+        <BlogHeader title={`Thinking ${tag ? `about ${tag}` : ''}- ${offset} to ${offset + limit} of ${total}`}/>
         <Layout id="main">
           <Content>
             <div id="page" className="page">
@@ -44,7 +54,9 @@ export default class extends React.Component {
                       <p className="info">发布时间：
                         <time
                           dateTime={DateTime.fromMillis(post.createdAt * 1000).toISOTime()}
-                          className="agotime">{DateTime.fromMillis(post.createdAt * 1000).toLocaleString()}</time>
+                          className="agotime"
+                        >{DateTime.fromMillis(post.createdAt * 1000).toLocaleString()}
+                        </time>
                       </p>
                     </div>
                   </div>

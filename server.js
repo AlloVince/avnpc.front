@@ -1,6 +1,8 @@
 const { EvaEngine, DI } = require('evaengine');
 const next = require('next');
 const http = require('http');
+const { parse } = require('url');
+const { join } = require('path');
 const routes = require('./routes');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -28,9 +30,17 @@ app
 
     expressApp.use(DI.get('debug')());
     expressApp.get('*', (req, res) => {
-      return handler(req, res);
+      const parsedUrl = parse(req.url, true);
+      const rootStaticFiles = [
+        '/robots.txt',
+        '/sitemap.xml',
+        '/favicon.ico'
+      ];
+      if (rootStaticFiles.indexOf(parsedUrl.pathname) > -1) {
+        const path = join(__dirname, 'static', parsedUrl.pathname);
+        return app.serveStatic(req, res, path);
+      }
+      return handler(req, res, parsedUrl);
     });
-    // console.log('---------hotReloader stats', app.hotReloader.stats);
     server.listen(port);
-
   });

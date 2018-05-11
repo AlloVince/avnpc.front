@@ -3,6 +3,7 @@ require('isomorphic-unfetch');
 
 const routes = module.exports = nextRoutes();
 routes.add('index', '/');
+routes.add('rss', '/rss');
 routes.add('thinking', '/thinking');
 routes.add('reading', '/reading');
 routes.add('note', '/reading/:slug');

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { withRouter } from 'next/router';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Icon, Input } from 'antd';
 import React from 'react';
 import AntdCss from '../styls/antd.less';
 import { Link } from '../routes';
@@ -44,7 +44,18 @@ class BlogHeader extends React.Component {
           <Menu.Item key="/about">
             <ActiveLink href="/about" icon="user">About</ActiveLink>
           </Menu.Item>
+          <Menu.Item key="/search">
+            <Input suffix={<Icon type="search" className="certain-category-icon"/>} className="search"/>
+          </Menu.Item>
         </Menu>
+        <style jsx>{`
+        .search input {
+          opacity:0.4;
+        }
+        .search input:focus {
+          opacity:1;
+        }
+        `}</style>
       </Sider>
     );
   }

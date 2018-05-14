@@ -1,5 +1,4 @@
 import React from 'react';
-import querystring from 'querystring';
 import { DateTime } from 'luxon';
 import { Layout, Pagination } from 'antd';
 import { Link, Router } from '../routes';
@@ -19,11 +18,14 @@ export default class extends React.Component {
     const { offset, limit = 10, tag } = query;
     return {
       query,
-      posts: await HttpClient.requestRestAPI(`${process.env.BACKEND_URL}/v1/blog/posts?${querystring.stringify({
-        offset,
-        limit,
-        tag
-      })}`)
+      posts: await HttpClient.requestRestAPI({
+        pathname: '/v1/blog/posts',
+        query: {
+          offset,
+          limit,
+          tag
+        }
+      })
     };
   }
 
@@ -47,8 +49,9 @@ export default class extends React.Component {
                       <h2>
                         <Link
                           route="page"
-                          params={{ slug: post.slug }}>
-                          <a href="#">{post.title}</a>
+                          params={{ slug: post.slug }}
+                        >
+                          <a href={`/pages/${post.slug}`}>{post.title}</a>
                         </Link>
                       </h2>
                       <p className="info">发布时间：

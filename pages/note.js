@@ -9,7 +9,7 @@ const { Content } = Layout;
 
 export default class extends React.Component {
   static async getInitialProps({ query }) {
-    return { post: await HttpClient.requestRestAPI(`${process.env.BACKEND_URL}/v1/evernote/notes/${query.slug}`), query };
+    return { post: await HttpClient.requestRestAPI({ pathname: `/v1/evernote/notes/${query.slug}`, query }) };
   }
 
   render() {

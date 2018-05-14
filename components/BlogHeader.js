@@ -27,6 +27,7 @@ class BlogHeader extends React.Component {
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
           <meta charSet="utf-8"/>
           <link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>
+          <link rel="alternate" type="application/rss+xml" title="Just Fine - Story of AlloVince" href="/rss" />
           <style key="antdCss">{AntdCss}</style>
           <style key="blogCss">{BlogCss}</style>
         </Head>

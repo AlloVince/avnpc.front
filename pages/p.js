@@ -1,18 +1,19 @@
 import React from 'react';
 import Router from 'next/router';
+import HttpClient from '../services/http_client';
+import config from '../universal.config';
 
 export default class extends React.Component {
   static async getInitialProps({ query, res }) {
-    const response = await fetch(`${process.env.BACKEND_URL}/v1/blog/posts/${query.id}`);
-    if (res) {
-      const json = await response.json();
+    const post = await HttpClient.requestRestAPI({ pathname: `/v1/blog/posts/${query.id}`, query });
+    if (post) {
       res.writeHead(302, {
-        Location: `${process.env.FRONTEND_URL}/pages/${json.slug}`
+        Location: `${config.FRONTEND_URL}/pages/${post.slug}`
       });
       res.end();
       res.finished = true;
     } else {
-      Router.replace(process.env.FRONTEND_URL);
+      Router.replace(config.FRONTEND_URL);
     }
     return {};
   }

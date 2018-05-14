@@ -1,7 +1,6 @@
 import Document_, { Head, Main, NextScript } from 'next/document';
 import htmlescape from 'htmlescape';
-
-const { env: { NODE_ENV } } = process;
+import config from '../universal.config';
 
 export default class Document extends Document_ {
   static async getInitialProps (ctx) {
@@ -16,7 +15,7 @@ export default class Document extends Document_ {
         <body>
           <Main />
           <script
-            dangerouslySetInnerHTML={{ __html: `__ENV__ = ${htmlescape({ NODE_ENV })}` }}
+            dangerouslySetInnerHTML={{ __html: `process = {}; window.__ENV__ = process.env = ${htmlescape(config)}` }}
           />
           <NextScript />
         </body>

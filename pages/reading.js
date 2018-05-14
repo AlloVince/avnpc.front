@@ -1,5 +1,4 @@
 import React from 'react';
-import querystring from 'querystring';
 import { DateTime } from 'luxon';
 import { Layout, Pagination } from 'antd';
 import { Link, Router } from '../routes';
@@ -10,11 +9,18 @@ const { Content } = Layout;
 
 export default class extends React.Component {
   static async getInitialProps({ query }) {
-    const { offset, limit } = query;
-    return HttpClient.requestRestAPI(`${process.env.BACKEND_URL}/v1/evernote/notes?${querystring.stringify({
-      offset,
-      limit
-    })}`);
+    const { offset, limit = 10, tag } = query;
+    return {
+      query,
+      posts: await HttpClient.requestRestAPI({
+        pathname: '/v1/evernote/notes',
+        query: {
+          offset,
+          limit,
+          tag
+        }
+      })
+    };
   }
 
   render() {

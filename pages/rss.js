@@ -1,15 +1,17 @@
 import React from 'react';
-import querystring from 'querystring';
 import { DateTime } from 'luxon';
 import xmlbuilder from 'xmlbuilder';
 import HttpClient from '../services/http_client';
 
 export default class extends React.Component {
   static async getInitialProps({ req, res }) {
-    const posts = await HttpClient.requestRestAPI(`${process.env.BACKEND_URL}/v1/blog/posts?${querystring.stringify({
-      withText: 1,
-      limit: 10
-    })}`);
+    const posts = await HttpClient.requestRestAPI({
+      pathname: '/v1/blog/posts',
+      query: {
+        withText: 1,
+        limit: 10
+      }
+    });
 
     const feed = xmlbuilder.create('feed', { encoding: 'utf-8' })
       .att('xmlns', 'http://www.w3.org/2005/Atom')
@@ -20,7 +22,7 @@ export default class extends React.Component {
       .ele('rights', 'Copyright (c) 2005-2018, AlloVince').up()
       // .ele('channel')
       .ele('link', { href: 'https://avnpc.com/rss', rel: 'self', type: 'application/rss+xml' }).up()
-      // .up();
+    // .up();
 
 
     posts.results.forEach((post) => {

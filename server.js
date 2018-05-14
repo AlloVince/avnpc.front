@@ -1,3 +1,4 @@
+require('./universal.config');
 const { EvaEngine, DI } = require('evaengine');
 const next = require('next');
 const http = require('http');

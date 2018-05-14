@@ -1,9 +1,42 @@
+import URL from 'url-parse';
+import config from '../universal.config';
+
+const urlParams = [
+  'protocol',
+  'slashes',
+  'auth',
+  'username',
+  'password',
+  'host',
+  'hostname',
+  'port',
+  'pathname',
+  'query',
+  'hash',
+  'href',
+  'origin'
+];
+
 export default class HttpClient {
-  static async requestRestAPI(...args) {
+  static async requestRestAPI(input, init) {
     let response = null;
     let json = null;
+    let url = null;
+    if (input.url) {
+      ({ url } = input);
+    } else {
+      url = new URL(config.BACKEND_URL);
+      urlParams.forEach((p) => {
+        if (input[p]) {
+          url.set(p, input[p]);
+        }
+      });
+      url = url.toString();
+    }
     try {
-      response = await fetch(...args);
+      response = await fetch(url, Object.assign({
+        method: 'GET'
+      }, input), init);
       json = await response.json();
       if (response.status > 300 && response.status < 500) {
         throw Error(json.message);

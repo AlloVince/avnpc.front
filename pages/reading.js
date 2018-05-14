@@ -24,7 +24,7 @@ export default class extends React.Component {
   }
 
   render() {
-    const { results: posts, pagination: { limit, offset, total } } = this.props;
+    const { posts: { results: posts, pagination: { limit, offset, total } } } = this.props;
     const onChange = (page) => {
       Router.pushRoute('reading', { offset: (page - 1) * limit, limit });
     };

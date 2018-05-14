@@ -17,6 +17,12 @@ const urlParams = [
   'origin'
 ];
 
+const filterObject = inputObject =>
+  Object
+    .entries(inputObject)
+    .filter(([, value]) => value !== undefined && value !== null)
+    .reduce((obj, [k, v]) => ({ ...obj, [k]: v }), {});
+
 export default class HttpClient {
   static async requestRestAPI(input, init) {
     let response = null;
@@ -28,12 +34,13 @@ export default class HttpClient {
       url = new URL(config.BACKEND_URL);
       urlParams.forEach((p) => {
         if (input[p]) {
-          url.set(p, input[p]);
+          url.set(p, typeof input[p] === 'object' ? filterObject(input[p]) : input[p]);
         }
       });
       url = url.toString();
     }
     try {
+      console.log(url)
       response = await fetch(url, Object.assign({
         method: 'GET'
       }, input), init);

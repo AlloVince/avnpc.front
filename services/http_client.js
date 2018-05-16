@@ -40,7 +40,6 @@ export default class HttpClient {
       url = url.toString();
     }
     try {
-      console.log(url)
       response = await fetch(url, Object.assign({
         method: 'GET'
       }, input), init);

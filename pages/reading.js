@@ -55,12 +55,14 @@ export default class extends React.Component {
                   </div>
                 )}
               </div>
+              {total > limit &&
               <Pagination
                 defaultCurrent={Math.floor(offset / limit) + 1}
                 pageSize={limit}
                 total={total}
                 onChange={onChange}
               />
+              }
             </div>
           </Content>
         </Layout>

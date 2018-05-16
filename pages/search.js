@@ -15,15 +15,14 @@ export default class extends React.Component {
   };
 
   static async getInitialProps({ query }) {
-    const { offset, limit = 10, tag } = query;
+    const { offset, q } = query;
     return {
       query,
       posts: await HttpClient.requestRestAPI({
-        pathname: '/v1/blog/posts',
+        pathname: '/v1/search',
         query: {
           offset,
-          limit,
-          tag
+          q
         }
       })
     };
@@ -31,14 +30,14 @@ export default class extends React.Component {
 
   render() {
     const { results: posts, pagination: { limit, offset, total } } = this.props.posts;
-    const { tag } = this.props.query;
+    const { q } = this.props.query;
     const onChange = (page) => {
       Router.pushRoute('thinking', { offset: (page - 1) * limit, limit });
     };
 
     return (
       <Layout>
-        <BlogHeader title={`Thinking ${tag ? `about ${tag}` : ''}- ${offset} to ${offset + limit} of ${total}`}/>
+        <BlogHeader title={`Searching ${q ? `about ${q}` : ''} - ${offset} to ${offset + limit} of ${total}`}/>
         <Layout id="main">
           <Content>
             <div id="page" className="page">
@@ -47,19 +46,9 @@ export default class extends React.Component {
                   <div className="item" key={`post-${post.id}`}>
                     <div className="item-inline item-title">
                       <h2>
-                        <Link
-                          route="page"
-                          params={{ slug: post.slug }}
-                        >
-                          <a href={`/pages/${post.slug}`}>{post.title}</a>
-                        </Link>
+                        <a href={post.url}>{post.title}</a>
                       </h2>
-                      <p className="info">发布时间：
-                        <time
-                          dateTime={DateTime.fromMillis(post.createdAt * 1000).toISOTime()}
-                          className="agotime"
-                        >{DateTime.fromMillis(post.createdAt * 1000).toLocaleString()}
-                        </time>
+                      <p className="info">{post.summary}
                       </p>
                     </div>
                   </div>

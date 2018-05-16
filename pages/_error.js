@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import BlogHeader from '../components/BlogHeader';
+import Exception from '../components/Exception';
 
 const { Content } = Layout;
 
@@ -12,11 +13,11 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout style={{ height: '100%' }}>
         <BlogHeader/>
-        <Layout id="main">
+        <Layout id="main" style={{ height: '100%', 'min-height': '100vh' }}>
           <Content>
-            {this.props.statusCode}
+            <Exception type={this.props.statusCode}/>
           </Content>
         </Layout>
       </Layout>

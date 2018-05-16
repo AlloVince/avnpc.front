@@ -6,6 +6,7 @@ routes.add('index', '/');
 routes.add('rss', '/rss');
 routes.add('thinking', '/thinking');
 routes.add('reading', '/reading');
+routes.add('search', '/search');
 routes.add('note', '/reading/:slug');
 routes.add('p', '/p/:id');
 routes.add('page', '/pages/:slug');

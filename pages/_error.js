@@ -15,7 +15,7 @@ export default class extends React.Component {
     return (
       <Layout style={{ height: '100%' }}>
         <BlogHeader/>
-        <Layout id="main" style={{ height: '100%', 'min-height': '100vh' }}>
+        <Layout id="main" style={{ height: '100%', minHeight: '100vh' }}>
           <Content>
             <Exception type={this.props.statusCode}/>
           </Content>

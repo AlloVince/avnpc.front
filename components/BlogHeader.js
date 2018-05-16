@@ -13,13 +13,22 @@ Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
-
 const { Sider } = Layout;
 
 class BlogHeader extends React.Component {
   static defaultProps = {
+    router: {},
     title: 'Just Fine'
   };
+
+  static getDefaultSelectedKeys(router) {
+    const { asPath: urlPath } = router;
+    if (urlPath === '/' || urlPath.startsWith('/pages')) {
+      return ['/thinking'];
+    }
+
+    return [urlPath.split('/').slice(0, 2).join('/')];
+  }
 
   render() {
     return (
@@ -38,11 +47,15 @@ class BlogHeader extends React.Component {
           <style key="mainCss">{AntdCss} {BlogCss} {NprogressCss}</style>
         </Head>
         <div id="logo" className="logo">
-          <h1><Link route="index"><a>Just Fine</a></Link></h1>
+          <h1><Link route="index"><a href="/">Just Fine</a></Link></h1>
           <p>— Story of AlloVince</p>
         </div>
         <div className="main-menu">
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={[this.props.router.pathname]}>
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={this.constructor.getDefaultSelectedKeys(this.props.router)}
+          >
             <Menu.Item key="/thinking">
               <ActiveLink href="/thinking" icon="code-o">Thinking</ActiveLink>
             </Menu.Item>
@@ -52,9 +65,14 @@ class BlogHeader extends React.Component {
             <Menu.Item key="/about">
               <ActiveLink href="/about" icon="user">About</ActiveLink>
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item key="/search">
               <form action="/search">
-                <Input name="q" suffix={<Icon type="search" className="certain-category-icon"/>} className="search"/>
+                <Input
+                  name="q"
+                  suffix={<Icon type="search" className="certain-category-icon"/>}
+                  className="search"
+                  defaultValue={this.props.router.pathname === '/search' ? this.props.router.query.q : ''}
+                />
               </form>
             </Menu.Item>
           </Menu>

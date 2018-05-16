@@ -1,29 +1,33 @@
 import React, { createElement } from 'react';
 import { Button } from 'antd';
-import styles from '../styls/exception.less';
 
 const config = {
+  401: {
+    img: 'https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg',
+    title: '401',
+    desc: '抱歉，你无权访问该页面'
+  },
   403: {
     img: 'https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg',
     title: '403',
-    desc: '抱歉，你无权访问该页面',
+    desc: '抱歉，你无权访问该页面'
   },
   404: {
     img: 'https://gw.alipayobjects.com/zos/rmsportal/KpnpchXsobRgLElEozzI.svg',
     title: '404',
-    desc: '抱歉，你访问的页面不存在',
+    desc: '抱歉，你访问的页面不存在'
   },
   500: {
     img: 'https://gw.alipayobjects.com/zos/rmsportal/RVRUAYdCGeYNBWoKiIwB.svg',
     title: '500',
-    desc: '抱歉，服务器出错了',
+    desc: '抱歉，服务器出错了'
   },
 };
 
 const Exception = ({ linkElement = 'a', type, title, desc, img, actions }) => {
   const pageType = type in config ? type : '404';
   return (
-    <div className="exception" style={{ height: '100%', 'min-height': '100vh', 'justify-content': 'center' }}>
+    <div className="exception" style={{ height: '100%', minHeight: '100vh', justifyContent: 'center' }}>
       <div className="imgBlock">
         <div
           className="imgEle"

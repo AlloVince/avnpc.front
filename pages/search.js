@@ -32,7 +32,7 @@ export default class extends React.Component {
     const { results: posts, pagination: { limit, offset, total } } = this.props.posts;
     const { q } = this.props.query;
     const onChange = (page) => {
-      Router.pushRoute('thinking', { offset: (page - 1) * limit, limit });
+      Router.pushRoute('search', { offset: (page - 1) * limit, limit, q });
     };
 
     return (
@@ -48,8 +48,7 @@ export default class extends React.Component {
                       <h2>
                         <a href={post.url}>{post.title}</a>
                       </h2>
-                      <p className="info">{post.summary}
-                      </p>
+                      <p className="info" dangerouslySetInnerHTML={{ __html: post.summary }} />
                     </div>
                   </div>
                 )}

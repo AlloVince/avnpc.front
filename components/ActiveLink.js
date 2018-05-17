@@ -11,7 +11,6 @@ const ActiveLink = ({ children, router, href, icon }) => {
 
   return (
     <div onClick={handleClick} className={className}>
-      <Icon type={icon}/>
       {children}
     </div>
   );

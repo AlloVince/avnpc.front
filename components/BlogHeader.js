@@ -3,11 +3,11 @@ import Router, { withRouter } from 'next/router';
 import { Layout, Menu, Icon, Input } from 'antd';
 import React from 'react';
 import NProgress from 'nprogress';
-import NprogressCss from 'nprogress/nprogress.css';
-import AntdCss from '../styls/antd.less';
+// import NprogressCss from 'nprogress/nprogress.css';
+// import AntdCss from '../styls/antd.less';
 import { Link } from '../routes';
 import ActiveLink from './ActiveLink';
-import BlogCss from '../styls/blog.styl';
+// import BlogCss from '../styls/blog.styl';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -22,7 +22,8 @@ class BlogHeader extends React.Component {
   };
 
   static getDefaultSelectedKeys(router) {
-    const { asPath: urlPath } = router;
+    const { asPath } = router;
+    const [urlPath] = asPath.split('?');
     if (urlPath === '/' || urlPath.startsWith('/pages')) {
       return ['/thinking'];
     }
@@ -44,7 +45,8 @@ class BlogHeader extends React.Component {
           <meta charSet="utf-8"/>
           <link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>
           <link rel="alternate" type="application/rss+xml" title="Just Fine - Story of AlloVince" href="/rss"/>
-          <style key="mainCss">{AntdCss} {BlogCss} {NprogressCss}</style>
+          <link href="/static/vendor.css" media="screen" rel="stylesheet" type="text/css" />
+          {/*<style key="mainCss">{BlogCss}</style>*/}
         </Head>
         <div id="logo" className="logo">
           <h1><Link route="index"><a href="/">Just Fine</a></Link></h1>

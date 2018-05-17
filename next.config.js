@@ -1,4 +1,5 @@
 const path = require('path');
+// const webpack = require('webpack');
 
 module.exports = {
   webpack: (config, { dev }) => {
@@ -34,6 +35,13 @@ module.exports = {
         loader: 'file-loader'
       },
     );
+
+    // config.plugins.push(
+      // new webpack.DllReferencePlugin({
+      //   context: __dirname,
+      //   manifest: require('./static/vendor-manifest.json'),
+      // })
+    // );
 
     // console.log('Next.js webpack module rules config:');
     // config.module.rules.forEach(rule => console.dir(rule));

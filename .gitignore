@@ -43,7 +43,4 @@ config/sequelize.json
 .nyc_output/
 yarn.lock
 .next
-
-antd-custom/index.js
-antd-custom/index.css
-antd-custom/common.js
+static/vendor*

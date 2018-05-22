@@ -3,8 +3,6 @@ import Router, { withRouter } from 'next/router';
 import { Layout, Menu, Icon, Input } from 'antd';
 import React from 'react';
 import NProgress from 'nprogress';
-// import NprogressCss from 'nprogress/nprogress.css';
-// import AntdCss from '../styls/antd.less';
 import { Link } from '../routes';
 import ActiveLink from './ActiveLink';
 // import BlogCss from '../styls/blog.styl';

@@ -10,8 +10,8 @@
   "scripts": {
     "dev": "node server.js",
     "pre-build": "atool-build --output-path=antd-custom --config=antd-custom/webpack.config.js",
-    "build": "NODE_ENV=production npm run build-dll && next build",
-    "build-dll": "webpack --config webpack.dll.js",
+    "build": "NODE_ENV=production npm run build:dll && next build",
+    "build:dll": "webpack --config webpack.dll.js",
     "start": "NODE_ENV=production node server.js",
     "ava": "LOG_LEVEL=error NODE_ENV=test node ./node_modules/.bin/ava --verbose --serial",
     "test": "npm run coverage",

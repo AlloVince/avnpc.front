@@ -5,8 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('[name].css');
 const vendors = [
   'nprogress/nprogress.css',
-  './styls/antd.less',
-  './styls/blog.styl',
+  './styles/antd.less',
+  './styles/blog.css'
 ];
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
     library: '[name]_[hash]'
   },
   entry: {
-    vendor: vendors,
+    vendor: vendors
   },
   module: {
     rules: [

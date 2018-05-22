@@ -2,7 +2,7 @@ import Head from 'next/head';
 import GitalkCss from 'gitalk/dist/gitalk.css';
 import KatexCss from 'katex/dist/katex.css';
 import React from 'react';
-import { Button, Icon, Divider, BackTop } from 'antd';
+import { Button, Icon, Divider, BackTop, Popover } from 'antd';
 import { Link } from '../routes';
 import markdown from '../markdown';
 
@@ -12,6 +12,20 @@ export default class extends React.Component {
   static defaultProps = {
     post: {}
   };
+
+  state = {
+    visible: false
+  };
+
+  hide = () => {
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleVisibleChange = (visible) => {
+    this.setState({ visible });
+  }
 
   componentDidMount() {
     const gitalkLibId = 'gitalk_lib';
@@ -114,8 +128,17 @@ export default class extends React.Component {
               <p>
                 Donate：<a
                 href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=allo.vince@gmail.com&currency_code=USD&amount=0.99&return=http://avnpc.com&item_name=Blog%20Of%20AlloVince&undefined_quantity=1&no_note=0">Buy
-                me a coffee <span className="icon-coffee"></span></a> | 文章有帮助，可以<a
-                href="https://me.alipay.com/allovince">请我喝杯咖啡 <span className="icon-coffee"></span></a>
+                me a coffee <span className="icon-coffee"></span></a> | 文章有帮助，可以
+                <Popover
+                  placement="top"
+                  title="微信或支付宝扫码"
+                  content={<img src="/static/images/buy-me-a-coffee.png" width="150px" />}
+                  trigger="click"
+                  visible={this.state.visible}
+                  onVisibleChange={this.handleVisibleChange}
+                >
+                  <a href="#">请我喝杯咖啡 <Icon type="coffee" /></a>
+                </Popover>
               </p>
               }
             </div>

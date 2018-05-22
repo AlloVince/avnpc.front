@@ -2,7 +2,7 @@ const path = require('path');
 // const webpack = require('webpack');
 
 module.exports = {
-  webpack: (config, { dev }) => {
+  webpack: (config, { dev = process.env.NODE_ENV !== 'production' }) => {
     config.module.rules.push(
       {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,

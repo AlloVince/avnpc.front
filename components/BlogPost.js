@@ -2,7 +2,8 @@ import Head from 'next/head';
 import GitalkCss from 'gitalk/dist/gitalk.css';
 import KatexCss from 'katex/dist/katex.css';
 import React from 'react';
-import { Button, Icon, Divider, BackTop, Popover } from 'antd';
+import { Button, Icon, Divider, BackTop, Popover, Tooltip } from 'antd';
+import { DateTime } from 'luxon';
 import { Link } from '../routes';
 import markdown from '../markdown';
 
@@ -19,13 +20,13 @@ export default class extends React.Component {
 
   hide = () => {
     this.setState({
-      visible: false,
+      visible: false
     });
   };
 
   handleVisibleChange = (visible) => {
     this.setState({ visible });
-  }
+  };
 
   componentDidMount() {
     const gitalkLibId = 'gitalk_lib';
@@ -99,9 +100,7 @@ export default class extends React.Component {
             </p> :
             <p className="copyright">
               日志未经声明，均为<a href="/about">AlloVince</a>原创。
-              <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
-                <img alt="知识共享许可协议" src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png"/>
-              </a> 本作品采用
+              本作品采用
               <a
                 rel="license"
                 href="http://creativecommons.org/licenses/by-nc/4.0/"
@@ -128,16 +127,15 @@ export default class extends React.Component {
               <p>
                 Donate：<a
                 href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=allo.vince@gmail.com&currency_code=USD&amount=0.99&return=http://avnpc.com&item_name=Blog%20Of%20AlloVince&undefined_quantity=1&no_note=0">Buy
-                me a coffee <span className="icon-coffee"></span></a> | 文章有帮助，可以
+                me a coffee | 文章有帮助，可以
                 <Popover
                   placement="top"
-                  title="微信或支付宝扫码"
-                  content={<img src="/static/images/buy-me-a-coffee.png" width="150px" />}
+                  content={<img src="/static/images/buy-me-a-coffee.png" width="150px"/>}
                   trigger="click"
                   visible={this.state.visible}
                   onVisibleChange={this.handleVisibleChange}
                 >
-                  <a href="#">请我喝杯咖啡 <Icon type="coffee" /></a>
+                  <a href="#">请我喝杯咖啡 <Icon type="coffee"/></a>
                 </Popover>
               </p>
               }
@@ -145,7 +143,13 @@ export default class extends React.Component {
             }
           </article>
 
-          <Divider/>
+          {post.contentStorage === 'remote' ?
+            <Divider orientation="right">
+              <Tooltip title="本文位于Github, 可发起PR编辑内容"><a href="">勘误 <Icon
+                type="edit"/></a></Tooltip>
+            </Divider>
+            : <Divider/>
+          }
 
           {(post.prev || post.next) &&
           <div style={{ textAlign: 'center' }}>
@@ -158,6 +162,13 @@ export default class extends React.Component {
               >
                 <Icon type="left"/>
                 <Link href={post.prev ? `/pages/${post.prev.slug}` : 'javascript:;'}><a>上一篇</a></Link>
+              </Button>
+              <Button
+                type="dashed"
+                size="large"
+                title={DateTime.fromMillis(post.createdAt * 1000).toLocaleString()}
+              >
+                  <Icon type="calendar"/>
               </Button>
               <Button
                 type="dashed"

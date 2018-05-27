@@ -127,7 +127,7 @@ export default class extends React.Component {
               <p>
                 Donate：<a
                 href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=allo.vince@gmail.com&currency_code=USD&amount=0.99&return=http://avnpc.com&item_name=Blog%20Of%20AlloVince&undefined_quantity=1&no_note=0">Buy
-                me a coffee | 文章有帮助，可以
+                me a coffee</a> | 文章有帮助，可以
                 <Popover
                   placement="top"
                   content={<img src="/static/images/buy-me-a-coffee.png" width="150px"/>}

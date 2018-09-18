@@ -4,7 +4,7 @@ import xmlbuilder from 'xmlbuilder';
 import HttpClient from '../services/http_client';
 
 export default class extends React.Component {
-  static async getInitialProps({ req, res }) {
+  static async getInitialProps({ res }) {
     const posts = await HttpClient.requestRestAPI({
       pathname: '/v1/blog/posts',
       query: {
@@ -18,12 +18,11 @@ export default class extends React.Component {
       .ele('title', { type: 'text' }, 'Just Fine - Story of AlloVince').up()
       .ele('updated', DateTime.fromMillis(posts.results[0].createdAt * 1000).toISO()).up()
       .ele('id', 'https://avnpc.com/').up()
-      .ele('link', { rel: 'alternate', type: 'text/html', hreflang: 'en', href: 'https://avnpc.com/' }).up()
+      .ele('link', {
+        rel: 'alternate', type: 'text/html', hreflang: 'en', href: 'https://avnpc.com/'
+      }).up()
       .ele('rights', 'Copyright (c) 2005-2018, AlloVince').up()
-      // .ele('channel')
-      .ele('link', { href: 'https://avnpc.com/rss', rel: 'self', type: 'application/rss+xml' }).up()
-    // .up();
-
+      .ele('link', { href: 'https://avnpc.com/rss', rel: 'self', type: 'application/rss+xml' }).up();
 
     posts.results.forEach((post) => {
       feed
@@ -46,9 +45,7 @@ export default class extends React.Component {
         .up();
     });
 
-    // res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
     res.write(feed.end({ pretty: true }));
     res.end();
   }
 }
-

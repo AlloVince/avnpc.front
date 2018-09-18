@@ -42,14 +42,19 @@ export default class extends React.Component {
                       <h2>
                         <Link
                           route="note"
-                          params={{ slug: post.slug }}>
-                          <a href="#">{post.title}</a>
+                          params={{ slug: post.slug }}
+                        >
+                          <a href={`/slug/${post.slug}`}>{post.title}</a>
                         </Link>
                       </h2>
-                      <p className="info">发布时间：
+                      <p className="info">
+                        发布时间：
                         <time
                           dateTime={DateTime.fromMillis(post.createdAt * 1000).toISOTime()}
-                          className="agotime">{DateTime.fromMillis(post.createdAt * 1000).toLocaleString()}</time>
+                          className="agotime"
+                        >
+                          {DateTime.fromMillis(post.createdAt * 1000).toLocaleString()}
+                        </time>
                       </p>
                     </div>
                   </div>
@@ -70,4 +75,3 @@ export default class extends React.Component {
     );
   }
 }
-

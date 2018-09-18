@@ -1,10 +1,8 @@
 import React from 'react';
-import { DateTime } from 'luxon';
 import { Layout, Pagination } from 'antd';
-import { Link, Router } from '../routes';
+import { Router } from '../routes';
 import BlogHeader from '../components/BlogHeader';
 import HttpClient from '../services/http_client';
-
 
 const { Content } = Layout;
 
@@ -29,8 +27,8 @@ export default class extends React.Component {
   }
 
   render() {
-    const { results: posts, pagination: { limit, offset, total } } = this.props.posts;
-    const { q } = this.props.query;
+    const { posts: { results: posts, pagination: { limit, offset, total } } } = this.props;
+    const { query: { q } } = this.props;
     const onChange = (page) => {
       Router.pushRoute('search', { offset: (page - 1) * limit, limit, q });
     };
@@ -48,7 +46,7 @@ export default class extends React.Component {
                       <h2>
                         <a href={post.url}>{post.title}</a>
                       </h2>
-                      <p className="info" dangerouslySetInnerHTML={{ __html: post.summary }} />
+                      <p className="info" dangerouslySetInnerHTML={{ __html: post.summary }}/>
                     </div>
                   </div>
                 )}
@@ -68,4 +66,3 @@ export default class extends React.Component {
     );
   }
 }
-

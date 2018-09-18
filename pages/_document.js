@@ -22,7 +22,7 @@ export default class Document extends Document_ {
             process.env.NODE_ENV === 'production' &&
             <div>
               <script async src="https://www.googletagmanager.com/gtag/js?id=UA-31189399-1"/>
-              <script dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-31189399-1');` }} />
+              <script dangerouslySetInnerHTML={{ __html: 'window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag("js", new Date());gtag("config", "UA-31189399-1");' }} />
             </div>
           }
         </body>

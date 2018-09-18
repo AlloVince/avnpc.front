@@ -30,15 +30,17 @@ export default class extends React.Component {
   }
 
   render() {
-    const { results: posts, pagination: { limit, offset, total } } = this.props.posts;
-    const { tag } = this.props.query;
+    const { posts: { results: posts, pagination: { limit, offset, total } } } = this.props;
+    const { query: { tag } } = this.props;
     const onChange = (page) => {
       Router.pushRoute('thinking', { offset: (page - 1) * limit, limit });
     };
 
     return (
       <Layout>
-        <BlogHeader title={`Thinking ${tag ? `about ${tag}` : ''}- ${offset} to ${offset + limit} of ${total}`}/>
+        <BlogHeader
+          title={`Story of AlloVince | Thinking ${tag ? `about ${tag}` : ''}- ${offset} to ${offset + limit} of ${total}`}
+        />
         <Layout id="main">
           <Content>
             <div id="page" className="page">
@@ -54,11 +56,13 @@ export default class extends React.Component {
                           <a href={`/pages/${post.slug}`}>{post.title}</a>
                         </Link>
                       </h2>
-                      <p className="info">发布时间：
+                      <p className="info">
+                        发布时间：
                         <time
                           dateTime={DateTime.fromMillis(post.createdAt * 1000).toISOTime()}
                           className="agotime"
-                        >{DateTime.fromMillis(post.createdAt * 1000).toLocaleString()}
+                        >
+                          {DateTime.fromMillis(post.createdAt * 1000).toLocaleString()}
                         </time>
                       </p>
                     </div>
@@ -80,4 +84,3 @@ export default class extends React.Component {
     );
   }
 }
-

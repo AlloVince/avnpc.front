@@ -1,4 +1,4 @@
-const config = process.env.NODE_ENV !== 'production' ? {
+const config = process.env.NODE_ENV === 'production' ? {
   BACKEND_URL: process.env.BACKEND_URL || 'https://api.avnpc.com',
   FRONTEND_URL: process.env.FRONTEND_URL || 'https://avnpc.com'
 } : {

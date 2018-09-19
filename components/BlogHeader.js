@@ -7,6 +7,7 @@ import React from 'react';
 import NProgress from 'nprogress';
 import { Link } from '../routes';
 import ActiveLink from './ActiveLink';
+import config from '../universal.config';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -48,8 +49,16 @@ class BlogHeader extends React.Component {
           <meta charSet="utf-8"/>
           <link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>
           <link rel="alternate" type="application/rss+xml" title="Just Fine - Story of AlloVince" href="/rss"/>
-          <link href="/static/vendor.css" media="screen" rel="stylesheet" type="text/css"/>
-          {/*<style key="mainCss">{BlogCss}</style>*/}
+          {config.ENV === 'production' &&
+          <link href="/static/vendor.css" rel="stylesheet" type="text/css"/>
+          }
+          {config.ENV !== 'production' &&
+          <style key="antdCss">
+            {require('nprogress/nprogress.css')}
+            {require('../styles/antd.less')}
+            {require('../styles/blog.css')}
+          </style>
+          }
         </Head>
         <div id="logo" className="logo">
           <h1><Link route="index"><a href="/">Just Fine</a></Link></h1>

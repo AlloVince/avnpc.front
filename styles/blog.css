@@ -80,3 +80,39 @@
   top:54%;
   right: 3px;
 }
+
+
+@media (max-width: 767.99px) {
+  #page {
+    padding: 40px;
+  }
+
+  h1 {
+    font-size: 1.3em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+    margin-bottom: 0.1em;
+  }
+
+  ul,ol {
+    padding-inline-start: 20px;
+  }
+
+  p.copyright {
+    font-size: 12px;
+  }
+
+  .markdown ul>li {
+    margin-left:0;
+  }
+
+  .markdown {
+    font-size: 14px;
+    line-height:1.6;
+  }
+  .markdown p{
+      margin: 0.5em 0;
+  }
+}

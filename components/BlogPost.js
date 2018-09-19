@@ -71,7 +71,7 @@ export default class extends React.Component {
       renderMermaid();
     } else {
       const mermaidLib = document.createElement('script');
-      mermaidLib.id = gitalkLibId;
+      mermaidLib.id = mermaidLibId;
       mermaidLib.src = 'https://unpkg.com/mermaid@8.0.0-rc.6/dist/mermaid.min.js';
       mermaidLib.onload = renderMermaid;
       document.body.appendChild(mermaidLib);

@@ -2,7 +2,9 @@ import Head from 'next/head';
 import GitalkCss from 'gitalk/dist/gitalk.css';
 import KatexCss from 'katex/dist/katex.css';
 import React from 'react';
-import { Button, Icon, Divider, BackTop, Popover, Tooltip } from 'antd';
+import {
+  Button, Icon, Divider, BackTop, Popover, Tooltip
+} from 'antd';
 import { DateTime } from 'luxon';
 import { Link } from '../routes';
 import markdown from '../markdown';
@@ -96,16 +98,20 @@ export default class extends React.Component {
 
           {post.type === 'note' ?
             <p className="copyright">
-              文章来源: <a href={post.sourceUrl}>{post.source || post.sourceUrl || '未记录'}</a>
+              文章来源:
+              <a href={post.sourceUrl}>{post.source || post.sourceUrl || '未记录'}</a>
             </p> :
             <p className="copyright">
-              日志未经声明，均为<a href="/about">AlloVince</a>原创。
-              本作品采用
+              日志未经声明，均为
+              <a href="/about">AlloVince</a>
+              原创。本作品采用
               <a
                 rel="license"
                 href="http://creativecommons.org/licenses/by-nc/4.0/"
-              >知识共享署名-非商业性使用 4.0 国际许可协议
-              </a>进行许可。
+              >
+                知识共享署名-非商业性使用 4.0 国际许可协议
+              </a>
+              进行许可。
             </p>
           }
 
@@ -114,20 +120,27 @@ export default class extends React.Component {
             <div dangerouslySetInnerHTML={{ __html: content }}/>
             {post.tags.length > 0 &&
             <div>
-              <p className="tags"> Tags :
+              <p className="tags">
+                Tags :
                 {post.tags.map((tag) => {
                   return (
                     <Link key={`tag-${tag.id}`} href={`/thinking?tag=${tag.tagName}`}>
-                      <a><Icon type="tags"/>{tag.tagName} </a>
+                      <a href={`/thinking?tag=${tag.tagName}`}>
+                        <Icon type="tags"/>
+                        {tag.tagName}
+                      </a>
                     </Link>
                   );
                 })}
               </p>
               {post.type === 'article' &&
               <p>
-                Donate：<a
-                href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=allo.vince@gmail.com&currency_code=USD&amount=0.99&return=http://avnpc.com&item_name=Blog%20Of%20AlloVince&undefined_quantity=1&no_note=0">Buy
-                me a coffee</a> | 文章有帮助，可以
+                Donate：
+                <a
+                  href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=allo.vince@gmail.com&currency_code=USD&amount=0.99&return=http://avnpc.com&item_name=Blog%20Of%20AlloVince&undefined_quantity=1&no_note=0">Buy
+                  me a coffee
+                </a>
+                | 文章有帮助，可以
                 <Popover
                   placement="top"
                   content={<img src="/static/images/buy-me-a-coffee.png" width="150px"/>}
@@ -135,7 +148,10 @@ export default class extends React.Component {
                   visible={this.state.visible}
                   onVisibleChange={this.handleVisibleChange}
                 >
-                  <a href="#">请我喝杯咖啡 <Icon type="coffee"/></a>
+                  <a href="#">
+                    请我喝杯咖啡
+                    <Icon type="coffee"/>
+                  </a>
                 </Popover>
               </p>
               }
@@ -145,8 +161,14 @@ export default class extends React.Component {
 
           {post.contentStorage === 'remote' ?
             <Divider orientation="right">
-              <Tooltip title="本文位于Github, 可发起PR编辑内容"><a href="">勘误 <Icon
-                type="edit"/></a></Tooltip>
+              <Tooltip title="本文位于Github, 可发起PR编辑内容">
+                <a
+                  href={`https://github.com/AlloVince/avnpc.content/blob/master/source/_posts/${DateTime.fromMillis(post.createdAt * 1000).toFormat('yyyy')}/${post.slug}.md`}
+                >
+                  勘误
+                  <Icon type="edit"/>
+                </a>
+              </Tooltip>
             </Divider>
             : <Divider/>
           }
@@ -168,7 +190,7 @@ export default class extends React.Component {
                 size="large"
                 title={DateTime.fromMillis(post.createdAt * 1000).toLocaleString()}
               >
-                  <Icon type="calendar"/>
+                <Icon type="calendar"/>
               </Button>
               <Button
                 type="dashed"
@@ -192,4 +214,3 @@ export default class extends React.Component {
     );
   }
 }
-

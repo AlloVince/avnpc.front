@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import Router, { withRouter } from 'next/router';
-import { Layout, Menu, Icon, Input } from 'antd';
+import {
+  Layout, Menu, Icon, Input
+} from 'antd';
 import React from 'react';
 import NProgress from 'nprogress';
 import { Link } from '../routes';
 import ActiveLink from './ActiveLink';
-// import BlogCss from '../styls/blog.styl';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -30,6 +31,10 @@ class BlogHeader extends React.Component {
   }
 
   render() {
+    const {
+      title,
+      router
+    } = this.props;
     return (
       <Sider
         onCollapse={this.onCollapse}
@@ -38,12 +43,12 @@ class BlogHeader extends React.Component {
         style={{ minHeight: '100vh', position: 'fixed' }}
       >
         <Head>
-          <title>{this.props.title}</title>
+          <title>{title}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
           <meta charSet="utf-8"/>
           <link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>
           <link rel="alternate" type="application/rss+xml" title="Just Fine - Story of AlloVince" href="/rss"/>
-          <link href="/static/vendor.css" media="screen" rel="stylesheet" type="text/css" />
+          <link href="/static/vendor.css" media="screen" rel="stylesheet" type="text/css"/>
           {/*<style key="mainCss">{BlogCss}</style>*/}
         </Head>
         <div id="logo" className="logo">
@@ -54,16 +59,20 @@ class BlogHeader extends React.Component {
           <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={this.constructor.getDefaultSelectedKeys(this.props.router)}
+            defaultSelectedKeys={this.constructor.getDefaultSelectedKeys(router)}
           >
             <Menu.Item key="/thinking">
-              <ActiveLink href="/thinking" icon="code-o">Thinking</ActiveLink>
+              <ActiveLink href="/thinking" icon="code-o">
+                <a href="/thinking" style={{ color: '#FFF' }}>Thinking</a>
+              </ActiveLink>
             </Menu.Item>
             <Menu.Item key="/reading">
-              <ActiveLink href="/reading" icon="book">Reading</ActiveLink>
+              <ActiveLink href="/reading" icon="book">
+                <a href="/reading" style={{ color: '#FFF' }}>Reading</a>
+              </ActiveLink>
             </Menu.Item>
             <Menu.Item key="/about">
-              <ActiveLink href="/about" icon="user">About</ActiveLink>
+              <a href="/about" style={{ color: '#FFF' }}>About</a>
             </Menu.Item>
             <Menu.Item key="/search">
               <form action="/search">
@@ -71,7 +80,7 @@ class BlogHeader extends React.Component {
                   name="q"
                   suffix={<Icon type="search" className="certain-category-icon"/>}
                   className="search"
-                  defaultValue={this.props.router.pathname === '/search' ? this.props.router.query.q : ''}
+                  defaultValue={router.pathname === '/search' ? router.query.q : ''}
                 />
               </form>
             </Menu.Item>
@@ -83,4 +92,3 @@ class BlogHeader extends React.Component {
 }
 
 export default withRouter(BlogHeader);
-

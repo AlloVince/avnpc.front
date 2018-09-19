@@ -1,8 +1,7 @@
 import { withRouter } from 'next/router';
-import { Icon } from 'antd';
 import 'react';
 
-const ActiveLink = ({ children, router, href, icon }) => {
+const ActiveLink = ({ children, router, href }) => {
   const className = router.pathname === href ? 'active' : null;
 
   const handleClick = () => {

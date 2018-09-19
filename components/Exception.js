@@ -24,7 +24,9 @@ const config = {
   },
 };
 
-const Exception = ({ linkElement = 'a', type, title, desc, img, actions }) => {
+const Exception = ({
+  linkElement = 'a', type, title, desc, img, actions
+}) => {
   const pageType = type in config ? type : '404';
   return (
     <div className="exception" style={{ height: '100%', minHeight: '100vh', justifyContent: 'center' }}>

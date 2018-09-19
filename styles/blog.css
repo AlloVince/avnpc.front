@@ -1,118 +1,132 @@
 /* sarina-regular - latin */
 @font-face {
-  font-family: 'Sarina';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Sarina'), local('Sarina-Regular'),
-          url('/static/fonts/sarina-v6-latin-regular.woff2') format('woff2'),
-          url('/static/fonts/sarina-v6-latin-regular.woff') format('woff');
+    font-family: 'Sarina';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Sarina'), local('Sarina-Regular'),
+    url('/static/fonts/sarina-v6-latin-regular.woff2') format('woff2'),
+    url('/static/fonts/sarina-v6-latin-regular.woff') format('woff');
 }
 
 /* great-vibes-regular - latin */
 @font-face {
-  font-family: 'Great Vibes';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Great Vibes'), local('GreatVibes-Regular'),
-          url('/static/fonts/great-vibes-v5-latin-regular.woff2') format('woff2'),
-          url('/static/fonts/great-vibes-v5-latin-regular.woff') format('woff');
+    font-family: 'Great Vibes';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Great Vibes'), local('GreatVibes-Regular'),
+    url('/static/fonts/great-vibes-v5-latin-regular.woff2') format('woff2'),
+    url('/static/fonts/great-vibes-v5-latin-regular.woff') format('woff');
 }
 
 #page {
-  background: #FFF;
-  padding: 100px 80px;
+    background: #FFF;
+    padding: 100px 80px;
 }
 
 .page-inner {
-  max-width: 1000px;
+    max-width: 1000px;
 }
 
 #logo {
-  padding: 50px 20px 0 20px;
+    padding: 50px 20px 0 20px;
 }
 
 #logo h1 {
-  font-size: 1.7em;
+    font-size: 1.7em;
 }
 
 #logo h1 a {
-  color: #FFFFFF;
-  font-weight: 300;
-  font-family: Sarina, Serif;
+    color: #FFFFFF;
+    font-weight: 300;
+    font-family: Sarina, Serif;
 }
 
 #logo p {
-  text-align: right;
-  color: #FFFFFF;
-  font-family: Great Vibes, Serif;
+    text-align: right;
+    color: #FFFFFF;
+    font-family: Great Vibes, Serif;
 }
 
 #main {
-  margin-left: 200px;
+    margin-left: 200px;
 }
 
 @media (max-width: 992px) {
-  #main {
-    margin-left: 0px;
-  }
+    #main {
+        margin-left: 0px;
+    }
 }
 
 .main-menu .ant-menu-item {
-  text-align: right;
-  font-family: Great Vibes, Serif;
-  font-size: 18px;
+    text-align: right;
+    font-family: Great Vibes, Serif;
+    font-size: 18px;
 }
 
 .search input {
-  margin-top: 4px;
-  opacity: 0.6;
+    margin-top: 4px;
+    opacity: 0.6;
 }
 
 .search input:focus {
-  opacity: 1;
+    opacity: 1;
 }
 
 .ant-menu-item-selected .search input {
-  opacity: 1;
+    opacity: 1;
 }
 
 .search .ant-input-suffix {
-  top:54%;
-  right: 3px;
+    top: 54%;
+    right: 3px;
 }
 
+.ant-layout-sider {
+    z-index: 100;
+    box-shadow: 3px 3px 3px #697b8c;
+}
 
 @media (max-width: 767.99px) {
-  #page {
-    padding: 40px;
-  }
 
-  h1 {
-    font-size: 1.3em;
-  }
+    #page {
+        padding: 40px;
+    }
 
-  h2 {
-    font-size: 1.2em;
-    margin-bottom: 0.1em;
-  }
+    h1 {
+        font-size: 1.3em;
+    }
 
-  ul,ol {
-    padding-inline-start: 20px;
-  }
+    h2 {
+        font-size: 1.2em;
+        margin-bottom: 0.1em;
+    }
 
-  p.copyright {
-    font-size: 12px;
-  }
+    ul, ol {
+        padding-inline-start: 20px;
+    }
 
-  .markdown ul>li {
-    margin-left:0;
-  }
+    p.copyright {
+        font-size: 12px;
+    }
 
-  .markdown {
-    font-size: 14px;
-    line-height:1.6;
-  }
-  .markdown p{
-      margin: 0.5em 0;
-  }
+    .markdown ul > li {
+        margin-left: 0;
+    }
+
+    .markdown {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .markdown p {
+        margin: 0.8em 0;
+    }
+
+    .ant-layout-sider {
+        visibility: hidden;
+    }
+
+    .collapsed-once.ant-layout-sider {
+        visibility: visible;
+    }
 }

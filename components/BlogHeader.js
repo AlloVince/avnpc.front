@@ -21,6 +21,10 @@ class BlogHeader extends React.Component {
     title: 'Just Fine'
   };
 
+  state = {
+    collapsedOnce: false
+  };
+
   static getDefaultSelectedKeys(router) {
     const { asPath } = router;
     const [urlPath] = asPath.split('?');
@@ -31,6 +35,12 @@ class BlogHeader extends React.Component {
     return [urlPath.split('/').slice(0, 2).join('/')];
   }
 
+  onCollapse() {
+    this.setState({
+      collapsedOnce: true
+    });
+  }
+
   render() {
     const {
       title,
@@ -38,9 +48,10 @@ class BlogHeader extends React.Component {
     } = this.props;
     return (
       <Sider
-        onCollapse={this.onCollapse}
+        onCollapse={this.onCollapse.bind(this)}
         breakpoint="lg"
         collapsedWidth="0"
+        className={this.state.collapsedOnce ? 'collapsed-once' : ''}
         style={{ minHeight: '100vh', position: 'fixed' }}
       >
         <Head>

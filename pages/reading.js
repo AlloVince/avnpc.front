@@ -65,6 +65,7 @@ export default class extends React.Component {
                 defaultCurrent={Math.floor(offset / limit) + 1}
                 pageSize={limit}
                 total={total}
+                size="small"
                 onChange={onChange}
               />
               }

@@ -8,6 +8,7 @@ import {
 import { DateTime } from 'luxon';
 import { Link } from '../routes';
 import markdown from '../markdown';
+import config from '../universal.config';
 
 const ButtonGroup = Button.Group;
 
@@ -84,8 +85,12 @@ export default class extends React.Component {
     return (
       <div className="page-content">
         <Head>
-          <style key="GitalkCss">{GitalkCss}</style>
-          <style key="KatexCss">{KatexCss}</style>
+          {config.ENV !== 'production' &&
+            <style key="GitalkCss">{GitalkCss}</style>
+          }
+          {config.ENV !== 'production' &&
+            <style key="KatexCss">{KatexCss}</style>
+          }
         </Head>
         <div>
           <div className="page-header">

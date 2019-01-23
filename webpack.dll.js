@@ -6,7 +6,11 @@ const extractCSS = new ExtractTextPlugin('[name].css');
 const vendors = [
   'nprogress/nprogress.css',
   './styles/antd.less',
-  './styles/blog.css'
+  './styles/blog.css',
+
+  //for page
+  'katex/dist/katex.css',
+  'gitalk/dist/gitalk.css'
 ];
 
 module.exports = {

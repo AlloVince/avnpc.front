@@ -45,3 +45,15 @@ app
     });
     server.listen(port);
   });
+
+const logger = DI.get('logger');
+
+for (const signal of ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGTERM', 'SIGABRT', 'SIGTSTP']) {
+  process.on(signal, () => {
+    logger.info('Received signal %s', signal);
+    setInterval(() => {
+      logger.info('Process exit by signal %s', signal);
+      process.exit(0);
+    }, 10000);
+  });
+}

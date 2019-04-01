@@ -1,7 +1,6 @@
-const withSourceMaps = require('@zeit/next-source-maps');
 require('dotenv').config();
 
-module.exports = withSourceMaps({
+module.exports = {
   webpack: (config, { dev = process.env.NODE_ENV !== 'production' }) => {
     config.module.rules.push(
       {
@@ -48,4 +47,4 @@ module.exports = withSourceMaps({
     // config.module.rules.forEach(rule => console.dir(rule));
     return config;
   }
-});
+};

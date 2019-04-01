@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const extractCSS = new ExtractTextPlugin('[name].css');
+const extractCSS = new ExtractTextPlugin('[name]_[chunkhash].dll.css');
 const vendors = [
   'nprogress/nprogress.css',
   './styles/antd.less',
@@ -10,15 +10,16 @@ const vendors = [
 
   //for page
   'katex/dist/katex.css',
-  'gitalk/dist/gitalk.css'
+  'gitalk/dist/gitalk.css',
+  'highlight.js/styles/darcula.css'
 ];
 
 module.exports = {
   context: __dirname,
   output: {
     path: path.join(__dirname, 'static'),
-    filename: '[name].dll.js',
-    library: '[name]_[hash]'
+    filename: '[name]_[chunkhash].dll.js',
+    library: '[name]_[chunkhash]'
   },
   entry: {
     vendor: vendors
@@ -59,8 +60,9 @@ module.exports = {
   plugins: [
     new webpack.DllPlugin({
       path: path.join(__dirname, 'static', '[name]-manifest.json'),
-      name: '[name]_[hash]'
+      name: '[name]_[chunkhash].dll.css'
     }),
     extractCSS
-  ]
+  ],
+  devtool: 'source-map'
 };

@@ -1,6 +1,3 @@
-import Head from 'next/head';
-import GitalkCss from 'gitalk/dist/gitalk.css';
-import KatexCss from 'katex/dist/katex.css';
 import React from 'react';
 import {
   Button, Icon, Divider, BackTop, Popover, Tooltip
@@ -8,7 +5,6 @@ import {
 import { DateTime } from 'luxon';
 import { Link } from '../routes';
 import markdown from '../markdown';
-import config from '../universal.config';
 
 const ButtonGroup = Button.Group;
 
@@ -84,14 +80,6 @@ export default class extends React.Component {
     const content = markdown().render(post.text.content);
     return (
       <div className="page-content">
-        <Head>
-          {config.ENV !== 'production' &&
-            <style key="GitalkCss">{GitalkCss}</style>
-          }
-          {config.ENV !== 'production' &&
-            <style key="KatexCss">{KatexCss}</style>
-          }
-        </Head>
         <div>
           <div className="page-header">
             <h1>
@@ -123,8 +111,8 @@ export default class extends React.Component {
 
           <article className="markdown">
             <div dangerouslySetInnerHTML={{ __html: content }}/>
-            {post.tags.length > 0 &&
             <div>
+              {post.tags.length > 0 &&
               <p className="tags">
                 Tags :
                 {post.tags.map((tag) => {
@@ -138,6 +126,7 @@ export default class extends React.Component {
                   );
                 })}
               </p>
+              }
               {post.type === 'article' &&
               <p>
                 Donate：
@@ -145,7 +134,7 @@ export default class extends React.Component {
                   href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=allo.vince@gmail.com&currency_code=USD&amount=0.99&return=http://avnpc.com&item_name=Blog%20Of%20AlloVince&undefined_quantity=1&no_note=0">Buy
                   me a coffee
                 </a>
-                | 文章有帮助，可以
+                |文章有帮助，可以
                 <Popover
                   placement="top"
                   content={<img src="/static/images/buy-me-a-coffee.png" width="150px"/>}
@@ -161,7 +150,6 @@ export default class extends React.Component {
               </p>
               }
             </div>
-            }
           </article>
 
           {post.contentStorage === 'remote' ?
@@ -209,6 +197,12 @@ export default class extends React.Component {
             </ButtonGroup>
           </div>
           }
+
+          <div style={{ textAlign: 'center', margin: '20px' }}>
+            <img src="/static/images/telegram.png" width="256px"/>
+            <br/>
+            <a href={'https://t.me/joinchat/HKvcQAw2kqASoYfxiSrIbA'} target={'_blank'}>Join My Telegram Group</a>
+          </div>
 
           {post.commentStatus === 'open' &&
           <div id="gitalk-container"/>

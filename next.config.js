@@ -1,7 +1,7 @@
-const path = require('path');
-// const webpack = require('webpack');
+const withSourceMaps = require('@zeit/next-source-maps');
+require('dotenv').config();
 
-module.exports = {
+module.exports = withSourceMaps({
   webpack: (config, { dev = process.env.NODE_ENV !== 'production' }) => {
     config.module.rules.push(
       {
@@ -36,16 +36,16 @@ module.exports = {
       },
     );
 
+    config.devtool = 'source-map';
     // config.plugins.push(
-      // new webpack.DllReferencePlugin({
-      //   context: __dirname,
-      //   manifest: require('./static/vendor-manifest.json'),
-      // })
+    // new webpack.DllReferencePlugin({
+    //   context: __dirname,
+    //   manifest: require('./static/vendor-manifest.json'),
+    // })
     // );
 
     // console.log('Next.js webpack module rules config:');
     // config.module.rules.forEach(rule => console.dir(rule));
     return config;
   }
-};
-
+});

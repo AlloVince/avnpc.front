@@ -60,16 +60,7 @@ class BlogHeader extends React.Component {
           <meta charSet="utf-8"/>
           <link href="/static/favicon.ico" type="image/x-icon" rel="icon"/>
           <link rel="alternate" type="application/rss+xml" title="Just Fine - Story of AlloVince" href="/rss"/>
-          {config.ENV === 'production' &&
-          <link href="/static/vendor.css" rel="stylesheet" type="text/css"/>
-          }
-          {config.ENV !== 'production' &&
-          <style key="antdCss">
-            {require('nprogress/nprogress.css')}
-            {require('../styles/antd.less')}
-            {require('../styles/blog.css')}
-          </style>
-          }
+          <link href={`/static/${require('../static/vendor-manifest').name}`} rel="stylesheet" type="text/css"/>
         </Head>
         <div id="logo" className="logo">
           <h1><Link route="index"><a href="/">Just Fine</a></Link></h1>

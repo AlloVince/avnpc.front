@@ -5,7 +5,7 @@ import markdownitFootnote from 'markdown-it-footnote';
 import markdownitSub from 'markdown-it-sub';
 import markdownitSup from 'markdown-it-sup';
 import markdownitKatex from 'markdown-it-katex';
-import hljs from 'highlight.js/lib/index';
+import hljs from 'highlight.js';
 
 const mermaidChart = (code) => {
   try {
@@ -46,7 +46,7 @@ export default () => {
           console.error(e);
         }
       }
-      return `<pre class="hljs"><code>${str}</code></pre>`
+      return `<pre class="hljs"><code>${str}</code></pre>`;
     }
   });
   markdown.use(markdownitAbbr);
@@ -58,4 +58,3 @@ export default () => {
   markdown.use(markdownitMermaid);
   return markdown;
 };
-

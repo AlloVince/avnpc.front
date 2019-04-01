@@ -44,3 +44,4 @@ config/sequelize.json
 yarn.lock
 .next
 static/vendor*
+.env

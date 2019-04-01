@@ -1,6 +1,5 @@
 import React from 'react';
 import { Layout } from 'antd';
-import hljsCss from 'highlight.js/styles/darcula.css';
 import BlogHeader from '../components/BlogHeader';
 import BlogPost from '../components/BlogPost';
 import HttpClient from '../services/http_client';
@@ -19,7 +18,6 @@ export default class extends React.Component {
     }
     return (
       <Layout>
-        <style dangerouslySetInnerHTML={{ __html: hljsCss.toString() }}/>
         <BlogHeader title={post.title}/>
         <Layout id="main">
           <Content>

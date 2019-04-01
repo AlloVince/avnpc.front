@@ -97,14 +97,14 @@
   margin: 0.2em 0;
 }
 
-.markdown code {
-  margin: 0 1px;
-  background: #f2f4f5;
-  padding: .2em .4em;
-  border-radius: 3px;
-  font-size: .9em;
-  border: 1px solid #eee;
-}
+//.markdown code {
+//  margin: 0 1px;
+//  background: #f2f4f5;
+//  padding: .2em .4em;
+//  border-radius: 3px;
+//  font-size: .9em;
+//  border: 1px solid #eee;
+//}
 
 .markdown pre {
   border-radius: @border-radius-sm;
@@ -112,15 +112,15 @@
   font-family: "Lucida Console", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
-.markdown pre code {
-  border: none;
-  background: #f2f4f5;
-  margin: 0;
-  padding: 0;
-  font-size: @font-size-base - 1px;
-  color: @site-text-color;
-  overflow: auto;
-}
+//.markdown pre code {
+//  border: none;
+//  background: #f2f4f5;
+//  margin: 0;
+//  padding: 0;
+//  font-size: @font-size-base - 1px;
+//  color: @site-text-color;
+//  overflow: auto;
+//}
 
 .markdown strong,
 .markdown b {
@@ -210,4 +210,87 @@
   clear: both;
 }
 
+
+
+/*
+
+Darcula color scheme from the JetBrains family of IDEs
+
+*/
+.markdown {
+  .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      background: #2b2b2b;
+  }
+
+  .hljs {
+      color: #bababa;
+  }
+
+  .hljs-strong,
+  .hljs-emphasis {
+      color: #a8a8a2;
+  }
+
+  .hljs-bullet,
+  .hljs-quote,
+  .hljs-link,
+  .hljs-number,
+  .hljs-regexp,
+  .hljs-literal {
+      color: #6896ba;
+  }
+
+  .hljs-code,
+  .hljs-selector-class {
+      color: #a6e22e;
+  }
+
+  .hljs-emphasis {
+      font-style: italic;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-section,
+  .hljs-attribute,
+  .hljs-name,
+  .hljs-variable {
+      color: #cb7832;
+  }
+
+  .hljs-params {
+      color: #b9b9b9;
+  }
+
+  .hljs-string {
+      color: #6a8759;
+  }
+
+  .hljs-subst,
+  .hljs-type,
+  .hljs-built_in,
+  .hljs-builtin-name,
+  .hljs-symbol,
+  .hljs-selector-id,
+  .hljs-selector-attr,
+  .hljs-selector-pseudo,
+  .hljs-template-tag,
+  .hljs-template-variable,
+  .hljs-addition {
+      color: #e0c46c;
+  }
+
+  .hljs-comment,
+  .hljs-deletion,
+  .hljs-meta {
+      color: #7f7f7f;
+  }
+}
+//.markdown pre.hljs code, .markdown .hljs code {
+//    background: none;
+//    color: #bababa;
+//}
 

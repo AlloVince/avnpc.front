@@ -1,6 +1,7 @@
 @import "~antd/dist/antd.less";
 @import './exception.less';
-@primary-color          : #045999;
+
+@primary-color: #045999;
 
 @site-heading-color: #0d1a26;
 @site-text-color: #314659;
@@ -59,10 +60,21 @@
   clear: both;
 }
 
-.markdown h3 { font-size: 18px; }
-.markdown h4 { font-size: 16px; }
-.markdown h5 { font-size: 14px; }
-.markdown h6 { font-size: 12px; }
+.markdown h3 {
+  font-size: 18px;
+}
+
+.markdown h4 {
+  font-size: 16px;
+}
+
+.markdown h5 {
+  font-size: 14px;
+}
+
+.markdown h6 {
+  font-size: 12px;
+}
 
 .markdown hr {
   height: 1px;
@@ -77,10 +89,15 @@
   margin: 1em 0;
 }
 
+.markdown ul {
+  padding-inline-start: 0;
+}
+
 .markdown ul > li {
   list-style-type: circle;
   margin-left: 20px;
   padding-left: 4px;
+
   &:empty {
     display: none;
   }
@@ -97,14 +114,14 @@
   margin: 0.2em 0;
 }
 
-//.markdown code {
-//  margin: 0 1px;
-//  background: #f2f4f5;
-//  padding: .2em .4em;
-//  border-radius: 3px;
-//  font-size: .9em;
-//  border: 1px solid #eee;
-//}
+.markdown code {
+  margin: 0 1px;
+  background: #f2f4f5;
+  padding: .2em .4em;
+  border-radius: 3px;
+  font-size: .9em;
+  border: 1px solid #eee;
+}
 
 .markdown pre {
   border-radius: @border-radius-sm;
@@ -112,22 +129,21 @@
   font-family: "Lucida Console", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
-//.markdown pre code {
-//  border: none;
-//  background: #f2f4f5;
-//  margin: 0;
-//  padding: 0;
-//  font-size: @font-size-base - 1px;
-//  color: @site-text-color;
-//  overflow: auto;
-//}
+.markdown pre code {
+  border: none;
+  background: #f2f4f5;
+  margin: 0;
+  padding: 0;
+  font-size: @font-size-base - 1px;
+  overflow: auto;
+}
 
 .markdown strong,
 .markdown b {
   font-weight: 500;
 }
 
-.markdown > table {
+.markdown > div > table {
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
@@ -136,15 +152,15 @@
   margin: 8px 0 16px;
 }
 
-.markdown > table th {
+.markdown > div > table th {
   white-space: nowrap;
   color: #5c6b77;
   font-weight: 500;
   background: rgba(0, 0, 0, 0.02);
 }
 
-.markdown > table th,
-.markdown > table td {
+.markdown > div > table th,
+.markdown > div > table td {
   border: 1px solid @site-border-color-split;
   padding: 16px 24px;
   text-align: left;
@@ -211,7 +227,6 @@
 }
 
 
-
 /*
 
 Darcula color scheme from the JetBrains family of IDEs
@@ -219,19 +234,27 @@ Darcula color scheme from the JetBrains family of IDEs
 */
 .markdown {
   .hljs {
-      display: block;
-      overflow-x: auto;
-      padding: 0.5em;
-      background: #2b2b2b;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #2b2b2b;
+    color: #bababa !important;
   }
 
-  .hljs {
-      color: #bababa;
+  .hljs code {
+    background: transparent;
+    border-radius: 0;
+    border: none;
+  }
+
+  .hljs pre code {
+    background: transparent;
+    color: #bababa !important;
   }
 
   .hljs-strong,
   .hljs-emphasis {
-      color: #a8a8a2;
+    color: #a8a8a2 !important;
   }
 
   .hljs-bullet,
@@ -240,16 +263,16 @@ Darcula color scheme from the JetBrains family of IDEs
   .hljs-number,
   .hljs-regexp,
   .hljs-literal {
-      color: #6896ba;
+    color: #6896ba !important;
   }
 
   .hljs-code,
   .hljs-selector-class {
-      color: #a6e22e;
+    color: #a6e22e !important;
   }
 
   .hljs-emphasis {
-      font-style: italic;
+    font-style: italic;
   }
 
   .hljs-keyword,
@@ -258,15 +281,15 @@ Darcula color scheme from the JetBrains family of IDEs
   .hljs-attribute,
   .hljs-name,
   .hljs-variable {
-      color: #cb7832;
+    color: #cb7832 !important;
   }
 
   .hljs-params {
-      color: #b9b9b9;
+    color: #b9b9b9 !important;
   }
 
   .hljs-string {
-      color: #6a8759;
+    color: #6a8759 !important;
   }
 
   .hljs-subst,
@@ -280,17 +303,13 @@ Darcula color scheme from the JetBrains family of IDEs
   .hljs-template-tag,
   .hljs-template-variable,
   .hljs-addition {
-      color: #e0c46c;
+    color: #e0c46c !important;
   }
 
   .hljs-comment,
   .hljs-deletion,
   .hljs-meta {
-      color: #7f7f7f;
+    color: #7f7f7f !important;
   }
 }
-//.markdown pre.hljs code, .markdown .hljs code {
-//    background: none;
-//    color: #bababa;
-//}
 

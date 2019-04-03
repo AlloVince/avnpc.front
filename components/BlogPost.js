@@ -27,6 +27,27 @@ export default class extends React.Component {
     this.setState({ visible });
   };
 
+  showTOC() {
+    const [toc] = document.getElementsByClassName('toc');
+    const tocMinWidth = 130;
+    const tocMargin = 15;
+    if (!toc) {
+      return;
+    }
+    const [page] = document.getElementsByClassName('page-content');
+    if (window.innerWidth - tocMinWidth < page.offsetLeft + page.clientWidth) {
+      toc.style.display = 'none';
+      return;
+    }
+
+    // console.log(tocMinWidth, window.innerWidth - page.offsetLeft - page.clientWidth - 30)
+    toc.style.display = 'block';
+    toc.style.position = 'fixed';
+    toc.style.width = `${Math.max(tocMinWidth, window.innerWidth - page.offsetLeft - page.clientWidth - tocMargin * 2)}px`;
+    toc.style.left = `${page.offsetLeft + page.clientWidth + tocMargin}px`;
+    toc.style.top = `${Math.max(page.offsetTop - document.documentElement.scrollTop, 0)}px`;
+  }
+
   componentDidMount() {
     const gitalkLibId = 'gitalk_lib';
     const gitalkPostId = `POST_${this.props.post.id}`;
@@ -73,6 +94,10 @@ export default class extends React.Component {
       mermaidLib.onload = renderMermaid;
       document.body.appendChild(mermaidLib);
     }
+
+    window.addEventListener('resize', this.showTOC);
+    window.addEventListener('scroll', this.showTOC);
+    this.showTOC();
   }
 
   render() {

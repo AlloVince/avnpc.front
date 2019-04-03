@@ -313,3 +313,57 @@ Darcula color scheme from the JetBrains family of IDEs
   }
 }
 
+
+.markdown {
+  .toc {
+    font-size: 12px;
+    border-left: 1px solid #ebedf0;
+    list-style: none;
+    display: none;
+  }
+
+  ul.toc > li {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+
+    &:not(:last-child) {
+      margin-bottom: 16px;
+    }
+  }
+
+  .toc li > ul {
+    margin-left: 15px;
+    text-indent: 0;
+    font-size: 12px;
+  }
+
+  .toc li > ul > li {
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .toc ul li {
+    list-style: none;
+  }
+
+  .toc a {
+    padding-left: 0;
+    display: block;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: @site-text-color;
+    //max-width: 200px;
+  }
+
+  .toc a:hover {
+    color: @primary-color;
+  }
+
+  .toc a.current {
+    border-color: @primary-color;
+    color: @primary-color;
+  }
+}

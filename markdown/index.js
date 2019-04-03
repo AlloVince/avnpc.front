@@ -5,6 +5,7 @@ import markdownitFootnote from 'markdown-it-footnote';
 import markdownitSub from 'markdown-it-sub';
 import markdownitSup from 'markdown-it-sup';
 import markdownitKatex from 'markdown-it-katex';
+import markdownItTocAndAnchor from "markdown-it-toc-and-anchor"
 import hljs from 'highlight.js';
 
 const mermaidChart = (code) => {
@@ -56,5 +57,8 @@ export default () => {
   markdown.use(markdownitSup);
   markdown.use(markdownitKatex);
   markdown.use(markdownitMermaid);
+  markdown.use(markdownItTocAndAnchor, {
+    tocClassName: 'toc'
+  });
   return markdown;
 };

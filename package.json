@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "./node_modules/.bin/babel-node server.js",
+    "dev-css": "webpack --watch --mode development --config webpack.dll.js",
     "pre-build": "atool-build --output-path=antd-custom --config=antd-custom/webpack.config.js",
     "build": "NODE_ENV=production npm run build:dll && next build",
     "build:dll": "NODE_ENV=production webpack --config webpack.dll.js -p",
@@ -44,6 +45,7 @@
     "markdown-it-katex": "^2.0.3",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
+    "markdown-it-toc-and-anchor": "^4.2.0",
     "mermaid": "^8.0.0-rc.6",
     "next": "^8.0.4-canary.30",
     "next-routes": "^1.4.2",

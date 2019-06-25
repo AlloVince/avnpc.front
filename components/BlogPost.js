@@ -246,9 +246,9 @@ export default class extends React.Component {
           }
 
           <div style={{ textAlign: 'center', margin: '20px' }}>
-            <img src="/static/images/telegram.png" width="256px"/>
+            <img src="/static/images/telegram.png" width="240px"/>
             <br/>
-            <a href={'https://t.me/joinchat/HKvcQAw2kqASoYfxiSrIbA'} target={'_blank'}>Join My Telegram Group</a>
+            <a href={'https://t.me/joinchat/HKvcQAw2kqASoYfxiSrIbA'} target={'_blank'}>技术讨论或提问</a>
           </div>
 
           {post.commentStatus === 'open' &&

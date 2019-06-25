@@ -28,7 +28,10 @@ module.exports = {
     rules: [
       {
         test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-        loader: 'url-loader'
+        loader: 'url-loader',
+        options: {
+          limit: 10000
+        }
       },
       {
         test: /\.css$/,

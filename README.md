@@ -9,3 +9,10 @@ Frontend of avnpc.com
 A Server-Side-Render blog theme based on Next.js / Ant.design / EvaEngine.js
 
 Backend API is [avnpc.js](https://github.com/AlloVince/avnpc.js)
+
+
+NOTE: in order to run `npm run dev`
+
+should replace `next/dist/client/next-dev.js` line #36
+
+`import('./noop');` => `require('./noop');`

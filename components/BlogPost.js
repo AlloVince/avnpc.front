@@ -48,6 +48,27 @@ export default class extends React.Component {
     toc.style.top = `${Math.max(page.offsetTop - document.documentElement.scrollTop, 0)}px`;
   }
 
+  codepen() {
+    const links = document.querySelectorAll('.markdown a[href^="https://codepen.io/AlloVince/pen/"]');
+    if (!links || links.length < 1) {
+      return;
+    }
+    links.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const href = e.target.href;
+        const match = href.match(/https:\/\/codepen.io\/AlloVince\/pen\/(\w+)(\?h=(\d+))?/i);
+        if (!match) {
+          return;
+        }
+        e.preventDefault();
+        const [, id, , height] = match;
+        const iframe = `<iframe height="${height || 265}" style="width: 100%;" scrolling="no" src="//codepen.io/AlloVince/embed/${id}/?height=265&theme-id=0&default-tab=js,result" frameborder="no" allowtransparency="true" allowfullscreen="true"></iframe>`;
+        e.target.parentNode.innerHTML = iframe;
+        return;
+      });
+    })
+  }
+
   componentDidMount() {
     const gitalkLibId = 'gitalk_lib';
     const gitalkPostId = `POST_${this.props.post.id}`;
@@ -98,6 +119,7 @@ export default class extends React.Component {
     window.addEventListener('resize', this.showTOC);
     window.addEventListener('scroll', this.showTOC);
     this.showTOC();
+    this.codepen();
   }
 
   render() {

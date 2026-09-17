@@ -1,6 +1,8 @@
 # 项目知识地图
 ## 何时读
 从 `AGENTS.md` 进入后，按当前任务选读；不全量加载。
+
+现代应用 `web/` 的架构、配置、运行和验证统一见 [现代前端](development/modern-web.md)。以下 server/pages/components/services/markdown 模块文档描述根目录旧应用，不代表新 App Router 实现；旧 Docker/CI 尚未切换。
 ## 任务 → 路径
 | 任务 | 文档 |
 |---|---|

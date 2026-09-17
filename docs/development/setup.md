@@ -1,6 +1,8 @@
 # 开发环境
 ## 何时读
 首次运行、选择 Node/包管理器或排查历史兼容问题时。
+
+新应用 `web/` 使用 Node 24 + pnpm 11.22.0，配置和本机 18348 启动步骤见 [现代前端](modern-web.md)。下文为根目录旧应用静态基线，不适用于 web，也不代表旧应用已完成迁移。
 ## 已确认的仓库约束
 - package engines 为 Node >=10；历史 Travis 指定 Node 10，Docker 为 node:10-alpine。只是声明/配置证据，不证明现代 Node 兼容，也不建议把已停止维护的 Node 10 用于新的生产部署。
 - 包脚本、Makefile、Docker、CI 均使用 npm；未发现受控锁文件，yarn.lock 被忽略，未声明 packageManager 或运行时版本管理文件。

@@ -8,6 +8,12 @@
 - 固定 Next 16.3.5、React/react-dom 19.3.0，Node 24（本机验证 24.18.0）、pnpm 11.22.0；精确解析以 `web/pnpm-lock.yaml` 为准。不将版本声明等同持续的“最新版本”。
 - L1：独立目录隔离旧依赖与构建，保留 SSR/API/URL；代价是两套入口暂时并存，部署尚未切换。API、ownership、数据存储 contract 未改变。
 
+## 视觉兼容约束（2026-09-17 用户纠正）
+- 现代化仅升级实现，不授权重新设计：整体配色、布局和页面效果以根目录旧版 `components/BlogHeader.js`、`pages/index.js`、`styles/blog.css`、`styles/antd.less` 为基准；不新增口号、格言、装饰区。
+- `web/` 已恢复深蓝 200px 固定侧栏、白底蓝链、原 Logo 字体、紧凑文章列表和正文基础排版；移除首页 Hero、页脚格言、阅读页口号与列表装饰箭头。移动端保留可折叠导航。
+- 字体从旧 `static/fonts` 构建；Turbopack root 为仓根，`web/postcss.config.js` 隔离旧 PostCSS 插件，不新增依赖。
+- 本轮现有单测 15/15、生产构建和 diff 检查通过。模拟数据仅查看了首页 DOM，不是截图对比或真实后端验收；临时服务与测试数据文件已清理。现场 18347/18348 未运行，桌面/移动端真实内容视觉及交互仍待复验，不声称像素级还原。
+
 ## 运行
 在 `web/` 中执行，或使用 `pnpm --dir /Users/allovince/Developer/avnpc.front/web …`：
 

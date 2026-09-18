@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const config = {
   poweredByHeader: false,
-  turbopack: { root: import.meta.dirname },
+  // The original brand fonts live in the repository's static/fonts directory.
+  turbopack: { root: new URL('..', import.meta.url).pathname },
 };
 export default config;

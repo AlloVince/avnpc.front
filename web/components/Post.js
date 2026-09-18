@@ -5,11 +5,15 @@ import { renderMarkdown } from '../lib/markdown';
 export default function Post({ post }) {
   const source = post.text?.content || post.text?.markedContent || '';
   return <article className="article">
-    <header className="article-header"><Link className="eyebrow" href="/thinking">← THINKING / 技术与生活</Link><h1>{post.title}</h1><p className="meta"><time dateTime={new Date(post.createdAt * 1000).toISOString()}>{dateLabel(post.createdAt)}</time><span>AlloVince</span></p></header>
+    <header className="article-header"><h1><Link href={`/p/${post.id}`} rel="nofollow">{post.title}</Link></h1></header>
+    <p className="license">日志未经声明，均为 <Link href="/about">AlloVince</Link> 原创。本作品采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a> 进行许可。</p>
     {source ? <div className="prose" dangerouslySetInnerHTML={{ __html: renderMarkdown(source) }}/> : <p role="status">这篇文章暂时没有正文。</p>}
-    <div className="tags">{(post.tags || []).map(tag => <Link key={tag.id} href={`/thinking?tag=${encodeURIComponent(tag.tagName)}`}># {tag.tagName}</Link>)}</div>
-    <p className="license">除特别声明外，文章由 <Link href="/about">AlloVince</Link> 原创，采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> 许可。</p>
-    <nav className="post-nav" aria-label="相邻文章">{post.prev && <Link href={`/pages/${encodeURIComponent(post.prev.slug)}`}><small>← 上一篇</small>{post.prev.title}</Link>}{post.next && <Link href={`/pages/${encodeURIComponent(post.next.slug)}`}><small>下一篇 →</small>{post.next.title}</Link>}</nav>
-    {post.commentStatus === 'open' && <p className="service-note">评论服务尚未配置。<a href="https://github.com/AlloVince/avnpc.content/issues">可在 GitHub 反馈或勘误 ↗</a></p>}
+    {post.tags?.length > 0 && <div className="tags">Tags：{post.tags.map(tag => <Link key={tag.id} href={`/thinking?tag=${encodeURIComponent(tag.tagName)}`}>{tag.tagName}</Link>)}</div>}
+    {(post.prev || post.next) && <nav className="post-nav" aria-label="相邻文章">
+      {post.prev && <Link href={`/pages/${encodeURIComponent(post.prev.slug)}`} title={post.prev.title}>‹ 上一篇</Link>}
+      <time dateTime={new Date(post.createdAt * 1000).toISOString()}>{dateLabel(post.createdAt)}</time>
+      {post.next && <Link href={`/pages/${encodeURIComponent(post.next.slug)}`} title={post.next.title}>下一篇 ›</Link>}
+    </nav>}
+    {post.commentStatus === 'open' && <p className="service-note">评论服务尚未配置。<a href="https://github.com/AlloVince/avnpc.content/issues">反馈或勘误</a></p>}
   </article>;
 }

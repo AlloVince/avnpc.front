@@ -1,7 +1,10 @@
-import Link from 'next/link';
-import './globals.css';
-import 'highlight.js/styles/github-dark.css';
+import localFont from 'next/font/local';
+import Sidebar from '../components/Sidebar';
 import 'katex/dist/katex.min.css';
+import './globals.css';
+
+const sarina = localFont({ src: '../../static/fonts/sarina-v6-latin-regular.woff2', variable: '--font-sarina', display: 'swap' });
+const greatVibes = localFont({ src: '../../static/fonts/great-vibes-v5-latin-regular.woff2', variable: '--font-great-vibes', display: 'swap' });
 
 export const metadata = {
   title: { default: 'Just Fine — Story of AlloVince', template: '%s | Just Fine' },
@@ -10,16 +13,9 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return <html lang="zh-CN"><body>
+  return <html lang="zh-CN" className={`${sarina.variable} ${greatVibes.variable}`}><body>
     <a className="skip-link" href="#main">跳到正文</a>
-    <header className="site-header">
-      <Link className="brand" href="/">Just Fine<span>Story of AlloVince</span></Link>
-      <nav aria-label="主导航">
-        <Link href="/thinking">Thinking</Link><Link href="/reading">Reading</Link><Link href="/about">About</Link><a href="/rss">RSS ↗</a>
-      </nav>
-      <form action="/search" className="search-form" role="search"><label className="sr-only" htmlFor="site-search">搜索博客</label><input id="site-search" name="q" type="search" placeholder="搜索文章…" maxLength={200}/><button type="submit">搜索</button></form>
-    </header>
-    <main id="main">{children}</main>
-    <footer className="site-footer"><span>Just Fine · AlloVince</span><span>记录思考，保持好奇。</span><a href="/rss">订阅 Atom</a></footer>
+    <Sidebar/>
+    <main id="main" tabIndex={-1}><div className="page-inner">{children}</div></main>
   </body></html>;
 }

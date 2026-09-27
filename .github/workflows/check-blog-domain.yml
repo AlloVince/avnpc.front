@@ -1,0 +1,24 @@
+name: Check blog custom domain
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-domain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read Cloudflare Pages domain status
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+        run: |
+          set -euo pipefail
+          endpoint="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$CLOUDFLARE_PAGES_PROJECT/domains/avnpc.com"
+          response="$(curl --fail-with-body --silent --show-error "$endpoint" \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN")"
+          jq -e '.success == true' >/dev/null <<< "$response"
+          jq '{success, errors, result: {name: .result.name, status: .result.status, zone_tag: .result.zone_tag, validation_data: .result.validation_data, verification_data: .result.verification_data}}' <<< "$response"

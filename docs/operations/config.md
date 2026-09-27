@@ -1,6 +1,12 @@
 # 配置与公开边界
 ## 何时读
 修改环境变量、运行模式、后端地址或配置注入时。
+
+## 静态博客构建配置
+- `CONTENT_ROOT` 是构建期路径，指向内容仓的 `source/`。本机默认 sibling `avnpc.content/source`；GitHub workflow 指向其 checkout 路径。它不会写入浏览器或静态 bundle。
+- `FRONTEND_URL` 只供构建期 RSS 链接使用，静态发布默认 `https://avnpc.com`。
+- Cloudflare API token 只保存在前端 GitHub Actions secret `CLOUDFLARE_API_TOKEN`；Account ID 和 Pages 项目名保存在 Actions variables。设置步骤见 [发布](deploy.md)。
+- 静态页面没有 `BACKEND_URL`，也不把 API URL 或服务器凭证嵌入 HTML。
 ## 通用配置
 | 键 | 源码行为 |
 |---|---|

@@ -2,8 +2,8 @@
 ## 何时读
 理解系统定位、请求主路径或跨模块改动时。
 
-## 现代应用（本地演示）
-`web/` 为独立 Next 16 / React 19 App Router SSR 应用。服务端页面经 `web/lib/api.js` 消费已有后端 REST；框架直接启动，无旧 EvaEngine/DLL 管线。主要 URL 与 API contract 保持，原生 CSS；根目录旧应用及生产入口未切换。决定、模块地图、验证和缺口见 [现代前端](../development/modern-web.md)。以下各节仅描述根目录旧应用。
+## 现代应用（AC-003 静态恢复）
+`web/` 为独立 Next 16 / React 19 App Router 静态导出应用。构建从 `avnpc.content` 读取 Markdown/front matter，输出 slug 页面、列表、浏览器全文搜索索引、RSS、robots 和 sitemap；运行时页面不请求 `avnpc.js`。GitHub Actions 发布方案已实现，需 Cloudflare Direct Upload 项目和账号配置，尚未部署。根目录旧应用仍保留但不参与静态构建。实现、验证和未决评论/发布配置见 [现代前端](../development/modern-web.md) 与 [发布](../operations/deploy.md)。以下各节仅描述根目录旧应用。
 ## 定位与证据
 - `avnpc.front`：avnpc.com 的 SSR 博客前端；原 README 指向独立后端 `AlloVince/avnpc.js`。已有实现，当前运营/维护阶段待确认。
 - 声明依赖：Next.js `^9.0.2`、React `^16.8.6`、Ant Design `^3.20.3`、EvaEngine `^0.11.1`、Webpack `^4.35.3`。无锁文件，不能把声明版本当已安装版本。

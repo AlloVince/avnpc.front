@@ -1,0 +1,76 @@
+name: Build and deploy static blog
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Deployment target
+        type: choice
+        options:
+          - preview
+          - production
+        default: preview
+        required: true
+
+concurrency:
+  group: avnpc-blog-${{ inputs.target || 'production' }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out frontend
+        uses: actions/checkout@v4
+
+      - name: Check out blog content
+        uses: actions/checkout@v4
+        with:
+          repository: AlloVince/avnpc.content
+          ref: master
+          path: avnpc.content
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.22.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+
+      - name: Install frontend dependencies
+        run: pnpm --dir web install --frozen-lockfile
+
+      - name: Build static blog
+        run: pnpm --dir web build
+        env:
+          CONTENT_ROOT: ${{ github.workspace }}/avnpc.content/source
+
+      - name: Check Cloudflare configuration
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "Missing Actions secret CLOUDFLARE_API_TOKEN"; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "Missing Actions variable CLOUDFLARE_ACCOUNT_ID"; exit 1; }
+          test -n "$CLOUDFLARE_PAGES_PROJECT" || { echo "Missing Actions variable CLOUDFLARE_PAGES_PROJECT"; exit 1; }
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.136.3"
+          command: pages deploy web/out --project-name="$CLOUDFLARE_PAGES_PROJECT" --branch="$CF_PAGES_BRANCH"
+        env:
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+          CF_PAGES_BRANCH: ${{ inputs.target == 'production' && 'master' || format('preview-{0}', github.run_number) }}

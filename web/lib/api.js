@@ -1,3 +1,5 @@
+export { dateLabel } from './date';
+
 export class ApiError extends Error {
   constructor(status) {
     super('内容服务暂时不可用，请稍后重试。');
@@ -35,9 +37,4 @@ export async function requestApi(pathname, query = {}, fetcher = fetch) {
 
 export async function getPost(slug) {
   return requestApi(`/v1/blog/posts/${encodeURIComponent(slug)}`);
-}
-
-export function dateLabel(seconds) {
-  return new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Shanghai' })
-    .format(new Date(Number(seconds) * 1000));
 }

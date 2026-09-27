@@ -43,5 +43,6 @@ config/sequelize.json
 .nyc_output/
 yarn.lock
 .next
+.wrangler/
 static/vendor*
 .env

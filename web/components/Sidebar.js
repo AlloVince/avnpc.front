@@ -20,11 +20,11 @@ export default function Sidebar() {
     <header id="site-sidebar" className={`site-sidebar${open ? ' is-open' : ''}`}>
       <div className="logo"><h1><Link href="/" onClick={close}>Just Fine</Link></h1><p>— Story of AlloVince</p></div>
       <nav aria-label="主导航">
-        <Link href="/thinking" aria-current={active === '/thinking' ? 'page' : undefined} onClick={close}><span className="nav-icon" aria-hidden="true">&lt;/&gt;</span>Thinking</Link>
-        <Link href="/reading" aria-current={active === '/reading' ? 'page' : undefined} onClick={close}><svg className="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true"><path d="M2 2h9a2 2 0 0 1 2 2v10H4a2 2 0 0 1-2-2V2Zm0 9h11M5 2v9"/></svg>Reading</Link>
-        <Link href="/about" aria-current={active === '/about' ? 'page' : undefined} onClick={close}>About</Link>
+        <Link href="/thinking/" aria-current={active === '/thinking' ? 'page' : undefined} onClick={close}><span className="nav-icon" aria-hidden="true">&lt;/&gt;</span>Thinking</Link>
+        <Link href="/reading/" aria-current={active === '/reading' ? 'page' : undefined} onClick={close}><svg className="nav-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true"><path d="M2 2h9a2 2 0 0 1 2 2v10H4a2 2 0 0 1-2-2V2Zm0 9h11M5 2v9"/></svg>Reading</Link>
+        <Link href="/about/" aria-current={active === '/about' ? 'page' : undefined} onClick={close}>About</Link>
       </nav>
-      <form action="/search" className="search-form" role="search">
+      <form action="/search/" className="search-form" role="search">
         <label className="sr-only" htmlFor="site-search">搜索博客</label>
         <input id="site-search" name="q" type="search" maxLength={200}/>
         <button type="submit" aria-label="搜索"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4 4"/></svg></button>

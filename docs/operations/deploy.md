@@ -4,7 +4,7 @@
 
 ## AC-003 静态博客发布链路
 
-目标产物是 Next 静态导出 `web/out/`，由 Cloudflare Pages 直接托管。2026-09-27 已创建 Direct Upload 项目 `avnpc-blog`，生产分支为 `master`；前端 Actions 构建并上传成功，生产站已在 `https://avnpc-blog.pages.dev/` 提供服务。`avnpc.com` 已通过 Pages API 关联项目，当前状态仍为 `initializing`，公开 DNS 查询尚无 apex A/CNAME 响应；需在 Cloudflare DNS 为 `avnpc.com` 添加 `CNAME @ → avnpc-blog.pages.dev` 并启用代理后复验 HTTPS。
+目标产物是 Next 静态导出 `web/out/`，由 Cloudflare Pages 直接托管。2026-09-27 已创建 Direct Upload 项目 `avnpc-blog`，生产分支为 `master`；前端 Actions 构建并上传成功，生产站已在 `https://avnpc-blog.pages.dev/` 提供服务。`avnpc.com` 已通过 Pages API 关联项目；最近查询状态为 `pending`（domain verification 为 active，HTTP validation 为 pending）。Cloudflare 权威 nameserver 仍未返回 apex A/CNAME，`https://avnpc.com/` 返回 522。需核对 `avnpc.com` zone 中的 `CNAME @ → avnpc-blog.pages.dev`（Proxied）记录是否已保存，再复验 HTTPS。
 
 ### 自动触发
 
@@ -25,10 +25,10 @@
 
 - 目标项目 `avnpc-blog` 已确认为 Direct Upload，生产分支为 `master`。
 - 确认项目名和 Account ID 与前端仓的 Actions Variables 相同。
-- `avnpc.com` 的 Pages API 关联已成功，但状态仍为 `initializing`。若 apex 没有指向 Pages，进入 Cloudflare Dashboard → `avnpc.com` → DNS → Records，新增 `CNAME`：Name `@`、Target `avnpc-blog.pages.dev`、Proxy status `Proxied`、TTL `Auto`。先核对没有同名 A/AAAA/CNAME 冲突；保留 MX/TXT 等其他记录。Cloudflare 官方说明自定义 apex 域需由 Cloudflare zone 托管，并通过 Pages 的 custom domain 流程关联项目。[Cloudflare Custom Domains](https://developers.cloudflare.com/pages/configuration/custom-domains/)
+- `avnpc.com` 的 Pages API 关联已成功，当前 status `pending`、HTTP validation `pending`；API 返回 zone tag，指向 Pages 所属账户内的 zone。进入 Cloudflare Dashboard → `avnpc.com` → DNS → Records，核对 `CNAME`：Name `@`、Target `avnpc-blog.pages.dev`、Proxy status `Proxied`、TTL `Auto` 是否已保存。当前权威 NS 查询无 apex A/CNAME 答案；若记录缺失再新增，并先确认没有同名 A/AAAA/CNAME 冲突；保留 MX/TXT 等其他记录。Cloudflare 官方说明自定义 apex 域需由 Cloudflare zone 托管，并通过 Pages 的 custom domain 流程关联项目。[Cloudflare Custom Domains](https://developers.cloudflare.com/pages/configuration/custom-domains/)
 - Cloudflare 文档说明 Direct Upload 与 Git integration 是不同项目类型，之后不能互换；当前 `avnpc-blog` 已确定为 Direct Upload。[Cloudflare Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/)
 
-已验证的自动链路：内容仓 `master` push → 内容仓 Actions dispatch 前端 `target=production` → 前端构建并上传。预览 run `36328775016` 成功，生产 run `36328947264` 成功，内容 push 触发 run `36328905425` 成功；一次性域名关联 run `36329785592` 成功返回 Pages domain `initializing`。HTTP 核验显示生产首页、robots、sitemap、RSS、search index 和样例文章返回 200。完成 apex CNAME 后复验 `https://avnpc.com/` 和证书状态。此后内容 push 会自动部署到 `master` 生产分支。
+已验证的自动链路：内容仓 `master` push → 内容仓 Actions dispatch 前端 `target=production` → 前端构建并上传。预览 run `36328775016` 成功，生产 run `36328947264` 成功，内容 push 触发 run `36328905425` 成功；域名关联 run `36329785592` 成功；只读状态检查 run `36331160946` 显示 domain `pending`、HTTP validation `pending`、verification `active`。HTTP 核验显示生产首页、robots、sitemap、RSS、search index 和样例文章返回 200；自定义域返回 522，权威 DNS 无 apex A/CNAME 答案。完成 DNS 校正后复验 `https://avnpc.com/` 和证书状态。之后可在 `check-blog-domain.yml` 只读查看 Pages 域名状态。
 
 ### 权限和恢复
 

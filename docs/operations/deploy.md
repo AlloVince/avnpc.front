@@ -4,13 +4,13 @@
 
 ## AC-003 静态博客发布链路
 
-目标产物是 Next 静态导出 `web/out/`，由 Cloudflare Pages 直接托管。已批准使用前端仓 GitHub Actions 构建并调用 Wrangler Direct Upload；线上项目和自定义域名仍待核实，尚未部署。
+目标产物是 Next 静态导出 `web/out/`，由 Cloudflare Pages 直接托管。2026-09-27 已创建 Direct Upload 项目 `avnpc-blog`，生产分支为 `master`；前端 Actions 构建并上传成功，生产站已在 `https://avnpc-blog.pages.dev/` 提供服务。`avnpc.com` 已通过 Pages API 关联项目，当前状态仍为 `initializing`，公开 DNS 查询尚无 apex A/CNAME 响应；需在 Cloudflare DNS 为 `avnpc.com` 添加 `CNAME @ → avnpc-blog.pages.dev` 并启用代理后复验 HTTPS。
 
 ### 自动触发
 
 1. `avnpc.content` 在 `master` 分支 push `source/**` 时，`.github/workflows/notify-frontend.yml` 通过 GitHub CLI 触发 `avnpc.front` 的 `deploy-blog.yml`。
 2. 前端 workflow 检出两个仓，执行 `pnpm --dir web install --frozen-lockfile` 和静态构建，然后将 `web/out/` 上传到 Cloudflare Pages。
-3. 内容 push 将显式上传到 `master` 生产分支。前端仓 Actions 页面手动运行时，默认建 `preview-<run number>` 预览部署；确认预览后可选择 `production`。
+3. 内容 push 将显式上传到 `master` 生产分支。前端仓 Actions 页面手动运行时，默认建 `preview-<run number>` 预览部署；选择 `production` 上传 `master`。只有首次域名关联时勾选 `bind_domain`；内容 push 自动生产部署不重复创建域名关联。
 
 ### 账号配置（值只填在各自控制台，不要发到聊天或仓库）
 
@@ -23,13 +23,12 @@
 
 **Cloudflare**
 
-- 确认目标 Pages 项目为 Direct Upload。Direct Upload 项目的 `production_branch` 需通过 Cloudflare Pages API 设为 `master`，否则生产上传可能只成为 preview。
+- 目标项目 `avnpc-blog` 已确认为 Direct Upload，生产分支为 `master`。
 - 确认项目名和 Account ID 与前端仓的 Actions Variables 相同。
-- 核对项目的 Custom Domains 已绑定用户指定的 `avnpc.com`。当前项目类型、旧站入口、域名绑定及 DNS 均未读/未改。
-- Cloudflare 文档说明 Direct Upload 与 Git integration 是不同项目类型，Direct Upload 项目之后不能切换为 Git integration；若当前博客仍由 Git integration 项目托管，先确认目标项目再切换域名。[Cloudflare Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/)
-- 设置 Direct Upload 项目的生产分支时，在你自己的终端设置 `CLOUDFLARE_API_TOKEN` 环境变量后，可按 Cloudflare 官方 Pages API 将 `production_branch` 改成 `master`：`curl --fail-with-body --request PATCH "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$CLOUDFLARE_PAGES_PROJECT" --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" --header "Content-Type: application/json" --data '{"production_branch":"master"}'`。不要把 token 放入命令正文、聊天或仓库。[Cloudflare Pages API](https://developers.cloudflare.com/pages/configuration/api/)
+- `avnpc.com` 的 Pages API 关联已成功，但状态仍为 `initializing`。若 apex 没有指向 Pages，进入 Cloudflare Dashboard → `avnpc.com` → DNS → Records，新增 `CNAME`：Name `@`、Target `avnpc-blog.pages.dev`、Proxy status `Proxied`、TTL `Auto`。先核对没有同名 A/AAAA/CNAME 冲突；保留 MX/TXT 等其他记录。Cloudflare 官方说明自定义 apex 域需由 Cloudflare zone 托管，并通过 Pages 的 custom domain 流程关联项目。[Cloudflare Custom Domains](https://developers.cloudflare.com/pages/configuration/custom-domains/)
+- Cloudflare 文档说明 Direct Upload 与 Git integration 是不同项目类型，之后不能互换；当前 `avnpc-blog` 已确定为 Direct Upload。[Cloudflare Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/)
 
-账号配置完成后，先通过前端仓 Actions 手动运行（默认 `preview`）并检查 Pages 预览地址；确认文章/slug、搜索、RSS、robots、sitemap 和隐藏文章行为后，再手动选择 `production` 部署并核对自定义域名。此后内容 push 会自动部署到 `master` 生产分支。
+已验证的自动链路：内容仓 `master` push → 内容仓 Actions dispatch 前端 `target=production` → 前端构建并上传。预览 run `36328775016` 成功，生产 run `36328947264` 成功，内容 push 触发 run `36328905425` 成功；一次性域名关联 run `36329785592` 成功返回 Pages domain `initializing`。HTTP 核验显示生产首页、robots、sitemap、RSS、search index 和样例文章返回 200。完成 apex CNAME 后复验 `https://avnpc.com/` 和证书状态。此后内容 push 会自动部署到 `master` 生产分支。
 
 ### 权限和恢复
 

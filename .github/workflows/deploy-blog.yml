@@ -11,6 +11,11 @@ on:
           - production
         default: preview
         required: true
+      bind_domain:
+        description: Bind avnpc.com to the production Pages project
+        type: boolean
+        default: false
+        required: false
 
 concurrency:
   group: avnpc-blog-${{ inputs.target || 'production' }}
@@ -71,3 +76,25 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
           CF_PAGES_BRANCH: ${{ inputs.target == 'production' && 'master' || format('preview-{0}', github.run_number) }}
+
+      - name: Bind avnpc.com to Cloudflare Pages
+        if: ${{ inputs.bind_domain && inputs.target == 'production' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
+        run: |
+          set -euo pipefail
+          endpoint="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$CLOUDFLARE_PAGES_PROJECT/domains"
+          domains="$(curl --fail-with-body --silent --show-error "$endpoint" \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN")"
+          if jq -e --arg domain "avnpc.com" '.result[]? | select(.name == $domain)' >/dev/null <<< "$domains"; then
+            jq --arg domain "avnpc.com" '{success, domain: [.result[] | select(.name == $domain) | {name, status, validation_data}]}' <<< "$domains"
+            exit 0
+          fi
+          response="$(curl --fail-with-body --silent --show-error --request POST "$endpoint" \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            --header "Content-Type: application/json" \
+            --data '{"name":"avnpc.com"}')"
+          jq -e '.success == true' >/dev/null <<< "$response"
+          printf '%s\n' "$response" | jq '{success, errors, result: {name: .result.name, status: .result.status, validation_data: .result.validation_data}}'

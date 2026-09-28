@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  gitalk@1.8.0: d97b067df1cb32bd9b1c1ade2b203e5aea09a0ea01b629a349b4563e0ecf8bc8
+  gitalk@1.8.0: 5dd5658508bbbcb1b440112934e01ee3d59661b8ae483fef2fd61038eb66502d
 
 importers:
 
@@ -16,7 +16,7 @@ importers:
         version: 3.6.0
       gitalk:
         specifier: 1.8.0
-        version: 1.8.0(patch_hash=d97b067df1cb32bd9b1c1ade2b203e5aea09a0ea01b629a349b4563e0ecf8bc8)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@7.2.0)
+        version: 1.8.0(patch_hash=5dd5658508bbbcb1b440112934e01ee3d59661b8ae483fef2fd61038eb66502d)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@7.2.0)
       highlight.js:
         specifier: ^11.12.0
         version: 11.12.0
@@ -4477,7 +4477,7 @@ snapshots:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
-  gitalk@1.8.0(patch_hash=d97b067df1cb32bd9b1c1ade2b203e5aea09a0ea01b629a349b4563e0ecf8bc8)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@7.2.0):
+  gitalk@1.8.0(patch_hash=5dd5658508bbbcb1b440112934e01ee3d59661b8ae483fef2fd61038eb66502d)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(supports-color@7.2.0):
     dependencies:
       autosize: 3.0.21
       axios: 0.19.2(supports-color@7.2.0)

@@ -16,7 +16,7 @@
 - 从前端仓根目录部署 Worker：`pnpm dlx wrangler@4.136.3 login`，然后 `pnpm dlx wrangler@4.136.3 deploy --config web/worker/gitalk-oauth/wrangler.toml`。部署后分别运行 `pnpm dlx wrangler@4.136.3 secret put GITHUB_CLIENT_ID --config web/worker/gitalk-oauth/wrangler.toml` 和 `pnpm dlx wrangler@4.136.3 secret put GITHUB_CLIENT_SECRET --config web/worker/gitalk-oauth/wrangler.toml`；命令会交互式提示输入，不要用会回显值的 shell 命令。`secret put` 会发布 Worker 新版本。
 - 在前端 GitHub repo Settings → Secrets and variables → Actions → Variables 设置 `GITALK_CLIENT_ID` 为同一个 Client ID，`GITALK_OAUTH_PROXY` 为 `https://<Worker 域名>/oauth/access_token`。两个值都不是 Client Secret。Worker 的 OPTIONS 预检已返回 204，伪造授权码的请求返回 GitHub `bad_verification_code`，确认代理已到达 GitHub 交换端点。
 - 评论存于 `AlloVince/avnpc.content`，管理员为 `AlloVince`，Issue 使用 `Gitalk` 与文章 ID 标签。历史文章沿用 `POST_<旧文章 ID>`，新文章使用稳定 slug ID（超过 49 字符时使用稳定摘要）。Gitalk 设置为手动创建 Issue，避免自动产生重复讨论；管理员在确认某篇没有对应旧 Issue 后，可在该文评论区创建 Issue。Issue 映射维护在内容仓 `source/_data/legacy-gitalk.json`。Gitalk 的 Issue 标签和 ID 限制见[官方配置说明](https://github.com/gitalk/gitalk#options)。
-- 2026-09-28 已比对 `avnpc.content` 的 90 个公开 Issue，并为所有匹配到当前文章的开放 Issue 添加映射；11 个有评论的开放 Issue 均能由对应文章加载。Gitalk 默认只读取开放 Issue；已关闭的重复 Issue 不会自动并入仍开放的同标签 Issue。
+- 2026-09-28 已比对 `avnpc.content` 的公开 Issue。Gitalk 查询开放与已关闭 Issue，并按创建时间倒序选择匹配项；明确关闭评论的文章以外，已为所有发布文章映射或初始化评论 Issue。旧文章映射在内容仓 `source/_data/legacy-gitalk.json`，新增讨论区需同时使用 `Gitalk` 标签和文章 ID 标签。
 ## 通用配置
 | 键 | 源码行为 |
 |---|---|

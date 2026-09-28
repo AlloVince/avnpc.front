@@ -1,23 +1,13 @@
 diff --git a/dist/gitalk.js b/dist/gitalk.js
-index 3fc55c42415d8f6eddca97bffef97fef44c582d0..008773b153f0338612b1bf9ddda0ce3f82ad9007 100644
 --- a/dist/gitalk.js
 +++ b/dist/gitalk.js
-@@ -13349,10 +13349,7 @@ var GitalkComponent = function (_Component) {
-     };
-
-     _this.getCommentsV3 = function (issue) {
+@@ -13352,4 +13352 @@
 -      var _this$options = _this.options,
 -          clientID = _this$options.clientID,
 -          clientSecret = _this$options.clientSecret,
 -          perPage = _this$options.perPage;
 +      var perPage = _this.options.perPage;
-       var page = _this.state.page;
-
-
-@@ -13361,11 +13358,8 @@ var GitalkComponent = function (_Component) {
-
-         return _util.axiosGithub.get(issue.comments_url, {
-           headers: {
+@@ -13364,5 +13361,2 @@
 -            Accept: 'application/vnd.github.v3.full+json'
 -          },
 -          auth: {
@@ -25,46 +15,29 @@ index 3fc55c42415d8f6eddca97bffef97fef44c582d0..008773b153f0338612b1bf9ddda0ce3f
 -            password: clientSecret
 +            Accept: 'application/vnd.github.v3.full+json',
 +            Authorization: _this.accessToken ? 'token ' + _this.accessToken : undefined
-           },
-           params: {
-             per_page: perPage,
-@@ -13705,17 +13699,14 @@ var GitalkComponent = function (_Component) {
-       var _options = this.options,
-           owner = _options.owner,
-           repo = _options.repo,
+@@ -13708,3 +13702 @@
 -          number = _options.number,
 -          clientID = _options.clientID,
 -          clientSecret = _options.clientSecret;
 +          number = _options.number;
-
-       var getUrl = '/repos/' + owner + '/' + repo + '/issues/' + number;
-
-       return new _promise2.default(function (resolve, reject) {
-         _util.axiosGithub.get(getUrl, {
+@@ -13716,3 +13708,2 @@
 -          auth: {
 -            username: clientID,
 -            password: clientSecret
 +          headers: {
 +            Authorization: _this4.accessToken ? 'token ' + _this4.accessToken : undefined
-           },
-           params: {
-             t: Date.now()
-@@ -13745,15 +13736,12 @@ var GitalkComponent = function (_Component) {
-           owner = _options2.owner,
-           repo = _options2.repo,
-           id = _options2.id,
+@@ -13748,3 +13739 @@
 -          labels = _options2.labels,
 -          clientID = _options2.clientID,
 -          clientSecret = _options2.clientSecret;
 +          labels = _options2.labels;
-
-
-       return _util.axiosGithub.get('/repos/' + owner + '/' + repo + '/issues', {
+@@ -13754,3 +13743,2 @@
 -        auth: {
 -          username: clientID,
 -          password: clientSecret
 +        headers: {
 +          Authorization: this.accessToken ? 'token ' + this.accessToken : undefined
-         },
-         params: {
-           labels: labels.concat(id).join(','),
+@@ -13759,0 +13748,3 @@
++          state: 'all',
++          sort: 'created',
++          direction: 'desc',

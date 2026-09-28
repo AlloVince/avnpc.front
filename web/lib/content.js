@@ -65,6 +65,7 @@ export function getAllPosts() {
     const published = attributes.published !== false;
     const legacyId = attributes.legacy_id ?? attributes.legacyId ?? null;
     const legacyGitalkId = legacyIssues[slug] || (legacyId !== null ? `POST_${legacyId}` : null);
+    const commentsClosed = attributes.comment_status === 'closed' || attributes.comments === false;
     const commentId = legacyGitalkId || (slug.length < 50
       ? slug
       : `slug-${createHash('sha256').update(slug).digest('hex').slice(0, 40)}`);
@@ -78,7 +79,7 @@ export function getAllPosts() {
       listed: attributes.listed !== false,
       tags: asArray(attributes.tags),
       categories: asArray(attributes.categories || attributes.category),
-      commentStatus: attributes.comment_status === 'open' || attributes.comments === true || Boolean(legacyIssues[slug]) ? 'open' : 'closed',
+      commentStatus: commentsClosed ? 'closed' : 'open',
       legacyGitalkId,
       commentId,
     };

@@ -12,7 +12,7 @@
 - `/rss`、`/robots.txt` 和 `/sitemap.xml` 均在构建期生成；Cloudflare Pages `_headers` 为 `/rss` 指定 Atom MIME 类型。构建没有读取 `avnpc.js`、数据库或 Redis。
 - `/p/:id` 路由已移除，不建立数字 ID 跳转。Reading 保留现有不可用提示；其动态详情页不随静态站导出。
 - `@[toc]` 会生成文章内层级目录；标题带稳定锚点。Mermaid fence 以及旧式 `graph`、`flowchart`、`sequenceDiagram`、`gantt`、`classDiagram`、`stateDiagram`、`erDiagram` fence 在浏览器渲染为图表。
-- Gitalk UI 已接入开放评论文章，历史 `POST_<id>` 标签由 sidecar/front matter 映射保留；新文章使用稳定 slug 身份。OAuth Client Secret 由独立 Worker 代理，不进入静态资源。Worker 与 Actions 配置已在线；生产站点将在本次提交部署后启用评论。8 个未匹配 Issue 不会被自动复制。操作步骤见 [评论与 OAuth 配置](../operations/config.md#gitalk-评论配置)。
+- Gitalk UI 默认显示在所有 published 文章中；只有 front matter 明确设 `comments: false` 或 `comment_status: closed` 才隐藏。已存在的旧 Issue 由内容仓 sidecar 映射到文章 slug，使用原有 `POST_<id>` 标签；新文章使用稳定 slug 身份。OAuth Client Secret 由独立 Worker 代理，不进入静态资源。操作步骤见 [评论与 OAuth 配置](../operations/config.md#gitalk-评论配置)。
 
 ## 构建与本机检查
 
@@ -30,7 +30,7 @@ GitHub workflow 将前端与 `avnpc.content` checkout 到同一工作目录，�
 
 - 2026-09-28：`pnpm --dir web lint` 与静态生产构建通过；生成 206 个 Next 静态页面任务，其中 196 个文章路由来自 199 篇内容（196 published、114 listed、82 unlisted、3 unpublished）。
 - 本轮构建产物检查：`@[toc]` 页面生成目录锚点；示例文章生成 3 个 Mermaid 图表容器；侧栏导航没有图标。构建中 61 篇内容标记开放评论。
-- 2026-09-28 评论接入：Gitalk 1.8.0 经锁文件补丁移除公开 Issue 读取时的 Client Secret Basic Auth；访问公开 Issue 不需要 Secret，授权用户的操作继续使用 OAuth access token。Worker 密钥已部署，GitHub Actions Variables 已设置；本轮 Pages 生产发布完成情况以本次部署结果为准。
+- 2026-09-28 评论接入：Gitalk 1.8.0 经锁文件补丁移除公开 Issue 读取时的 Client Secret Basic Auth；访问公开 Issue 不需要 Secret，授权用户的操作继续使用 OAuth access token。Worker 密钥已部署，GitHub Actions Variables 已设置。90 个公开 Issue 已对照内容仓；当前 11 个有评论的开放 Issue 均已映射。未关闭评论的旧文章默认显示评论框。
 - 已运行 `pnpm --dir web lint` 和静态构建；未执行 automated tests 或完整浏览器 OAuth 登录验收。Worker 预检返回 204，使用无效授权码的交换请求返回 GitHub `bad_verification_code`，未产生 access token。部署与既有线上验收证据见总仓 AC-003。
 - 静态构建不证明 Mermaid 浏览器渲染交互或线上部署后的行为；部署说明见 [发布](../operations/deploy.md)。
 

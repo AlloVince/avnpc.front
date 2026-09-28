@@ -7,7 +7,7 @@
 更新：2026-09-28
 
 ## 当前焦点
-- Confirmed：2026-09-28 已轮换 GitHub OAuth Secret、部署 Gitalk Worker 并设置 Actions Variables；侧栏、目录、Mermaid 和 Gitalk UI 的生产上线由本轮 Pages 部署完成。8 个无匹配旧 Issue 的处理见 `docs/operations/config.md`。
+- Confirmed：Gitalk 默认用于所有发布文章；只有 `comments: false` 或 `comment_status: closed` 才关闭。历史 Issue 映射维护在内容仓 `source/_data/legacy-gitalk.json`，新增/迁移旧文章前需按 slug 对照 GitHub Issue 的 `POST_<id>` 标签。
 
 ## 雷区与禁忌
 - Confirmed：现代化不是重新设计授权。用户要求保留旧版整体布局、配色和风格，不添加口号、格言或无关装饰；仅允许简洁的细节调整。

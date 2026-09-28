@@ -18,7 +18,8 @@ function tableOfContents(md) {
       const inline = state.tokens[i + 1];
       const id = token.attrGet('id');
       if (id && inline?.type === 'inline') {
-        headings.push({ level: Number(token.tag.slice(1)), id, title: inline.content });
+        const title = md.renderer.renderInlineAsText(inline.children, md.options, {});
+        headings.push({ level: Number(token.tag.slice(1)), id, title });
       }
     }
 

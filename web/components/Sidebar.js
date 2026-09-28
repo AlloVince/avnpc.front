@@ -26,7 +26,7 @@ export default function Sidebar() {
       </nav>
       <form action="/search/" className="search-form" role="search">
         <label className="sr-only" htmlFor="site-search">搜索博客</label>
-        <input id="site-search" name="q" type="search" maxLength={200} placeholder="搜索文章"/>
+        <input id="site-search" name="q" type="search" maxLength={200}/>
         <button type="submit" aria-label="搜索"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5"/><path d="m10 10 4 4"/></svg></button>
       </form>
     </header>

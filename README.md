@@ -1,18 +1,5 @@
 # avnpc.front
 
-[![Build Status](https://travis-ci.org/AlloVince/avnpc.front.svg?branch=master)](https://travis-ci.org/AlloVince/avnpc.front)
-[![Dependencies Status](https://david-dm.org/AlloVince/avnpc.front.svg)](https://david-dm.org/AlloVince/avnpc.front)
-[![License](https://img.shields.io/npm/l/avnpc.front.svg?maxAge=2592000?style=plastic)](https://github.com/AlloVince/avnpc.front/blob/master/LICENSE)
+Static frontend for [avnpc.com](https://avnpc.com), built from the Next.js application in `web/` and Markdown source in `avnpc.content`.
 
-Frontend of avnpc.com
-
-A Server-Side-Render blog theme based on Next.js / Ant.design / EvaEngine.js
-
-Backend API is [avnpc.js](https://github.com/AlloVince/avnpc.js)
-
-
-NOTE: in order to run `npm run dev`
-
-should replace `next/dist/client/next-dev.js` line #36
-
-`import('./noop');` => `require('./noop');`
+The site is exported to static files and deployed to Cloudflare Pages by GitHub Actions. The supported development, build, test, and deployment commands are documented in [docs/index.md](docs/index.md).

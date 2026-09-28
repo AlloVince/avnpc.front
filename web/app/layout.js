@@ -4,8 +4,8 @@ import 'gitalk/dist/gitalk.css';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 
-const sarina = localFont({ src: '../../static/fonts/sarina-v6-latin-regular.woff2', variable: '--font-sarina', display: 'swap' });
-const greatVibes = localFont({ src: '../../static/fonts/great-vibes-v5-latin-regular.woff2', variable: '--font-great-vibes', display: 'swap' });
+const sarina = localFont({ src: '../public/fonts/sarina-v6-latin-regular.woff2', variable: '--font-sarina', display: 'swap' });
+const greatVibes = localFont({ src: '../public/fonts/great-vibes-v5-latin-regular.woff2', variable: '--font-great-vibes', display: 'swap' });
 
 export const metadata = {
   title: { default: 'Just Fine — Story of AlloVince', template: '%s | Just Fine' },

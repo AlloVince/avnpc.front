@@ -10,8 +10,6 @@ docs/
 │   ├── overview.md
 │   ├── boundaries.md
 │   └── adr/           # 有决策再建
-├── components/
-│   └── <module>/      # 与代码模块对齐；改谁读谁
 ├── development/
 │   ├── setup.md
 │   ├── commands.md
@@ -30,10 +28,8 @@ docs/
 ## index.md
 任务类型 → 文件路径的地图。AGENTS 可指向此文件。保持短表。
 
-## 模块文档 `components/<module>/`
-建议 `README.md`（或单文件 `components/<module>.md`，全仓统一一种）。
-必含：职责、边界（不做的）、主要接口/入口路径、依赖、雷区（若有）、相关代码路径。
-禁止：粘贴大段源码；写其它模块的说明书。
+## 模块职责
+当前模块边界统一记录在 `architecture/boundaries.md`，现代前端的实现路径和行为见 `development/modern-web.md`。只有模块增长到需要独立加载的程度时，才新建模块文档。
 
 ## architecture
 - overview：系统是什么、主路径、关键结构
@@ -59,7 +55,7 @@ deploy；config（不写密钥原文）；runtime 运行特征与排障入口。
 
 ## 生成规则（bootstrap）
 1. 先扫代码与既有文档，再写；不确定标「待确认」，不编造
-2. 只为真实模块建 components
+2. 只为真实需求建模块文档
 3. 合并旧 AI 文档：代码 > 测试 > 已确认文档 > 历史 > 新生成
 4. 文风：中文、紧凑、少空行
 

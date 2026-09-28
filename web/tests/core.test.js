@@ -46,7 +46,7 @@ describe('Markdown rendering', () => {
 describe('Atom', () => {
   it('supports an empty feed', () => { expect(createFeed([], 'http://localhost:18348')).toContain('<feed xmlns='); });
   it('escapes text and uses configured origin', () => {
-    const feed = createFeed([{ id: 1, slug: 'test', title: 'A & B', createdAt: 1, text: { content: '<example> ]]>' } }], 'http://localhost:18348');
+    const feed = createFeed([{ id: 1, slug: 'test', title: 'A & B', createdAt: 1, body: '<example> ]]>' }], 'http://localhost:18348');
     expect(feed).toContain('A &amp; B'); expect(feed).toContain('&lt;example&gt;'); expect(feed).toContain('http://localhost:18348/pages/test');
   });
 });

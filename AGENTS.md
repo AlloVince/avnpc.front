@@ -13,7 +13,7 @@
 | 任务 | 入口 |
 |---|---|
 | 结构、责任与数据流 | [overview](docs/architecture/overview.md)、[boundaries](docs/architecture/boundaries.md) |
-| 改某模块 | [模块地图](docs/index.md)，只读对应模块与代码 |
+| 改某模块 | [模块地图](docs/index.md)，再读对应实现与职责文档 |
 | 环境、运行、测试 | [setup](docs/development/setup.md)、[commands](docs/development/commands.md)、[testing](docs/development/testing.md) |
 | 部署、配置、排障 | [deploy](docs/operations/deploy.md)、[config](docs/operations/config.md)、[runtime](docs/operations/runtime.md) |
 | 文档维护、外部变更同步 | [spec](docs/spec.md)、[sync](.ai/workflow/sync.md) |

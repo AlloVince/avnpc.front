@@ -9,7 +9,7 @@ git diff / 近期提交 / 改动文件。先理解再改文档。
 | 影响 | 更新 |
 |---|---|
 | 边界/数据流/结构 | `docs/architecture/`，必要时 ADR |
-| 模块职责/接口/行为 | `docs/components/<module>/` |
+| 模块职责/接口/行为 | `docs/architecture/boundaries.md`、`docs/development/modern-web.md` |
 | 命令/环境/测试方式 | `docs/development/` |
 | 部署/配置/运行 | `docs/operations/` |
 | 加载路径变化 | `docs/index.md`、必要时 AGENTS 加载表 |

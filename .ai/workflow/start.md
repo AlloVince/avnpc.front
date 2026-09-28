@@ -16,14 +16,14 @@
 
 ## 4. 按需加载
 - 查 `docs/index.md` 或 AGENTS 加载表
-- 只读相关 `docs/components/<module>/`
+- 只读任务相关架构/开发文档；当前 UI、数据与内容边界见 `docs/architecture/` 和 `docs/development/modern-web.md`
 - 跨模块才读 `docs/architecture/`
 - 跑通/测试读 `docs/development/`
 - 部署运维读 `docs/operations/`
 然后读相关代码与测试。禁止整仓扫描。
 
 ## 5. Context Budget
-优先：最小文档集 → 组件 docs → 再代码。上下文膨胀则先总结。
+优先：最小文档集 → 相关实现 → 再验证。上下文膨胀则先总结。
 
 ## 6. 确认（按规模）
 - 微/小：可直接干

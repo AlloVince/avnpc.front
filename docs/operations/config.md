@@ -18,25 +18,14 @@
 - 评论存于 `AlloVince/avnpc.content`，管理员为 `AlloVince`，Issue 使用 `Gitalk` 与文章 ID 标签。历史文章沿用 `POST_<旧文章 ID>`，新文章使用稳定 slug ID（超过 49 字符时使用稳定摘要）。Gitalk 设置为手动创建 Issue，避免自动产生重复讨论；管理员在确认某篇没有对应旧 Issue 后，可在该文评论区创建 Issue。Issue 映射维护在内容仓 `source/_data/legacy-gitalk.json`。Gitalk 的 Issue 标签和 ID 限制见[官方配置说明](https://github.com/gitalk/gitalk#options)。
 - 2026-09-28 已比对 `avnpc.content` 的公开 Issue。Gitalk 查询开放与已关闭 Issue，并按创建时间倒序选择匹配项；明确关闭评论的文章以外，已为所有发布文章映射或初始化评论 Issue。旧文章映射在内容仓 `source/_data/legacy-gitalk.json`，新增讨论区需同时使用 `Gitalk` 标签和文章 ID 标签。
 - 个别旧文章存在重复 Issue 时，Gitalk 只加载最新创建的一条，不会把多条 Issue 的评论合并。例如 `POST_138` 使用 #90（3 条评论），关闭的重复 #69 另有 1 条旧评论。
-## 通用配置
-| 键 | 源码行为 |
-|---|---|
-| NODE_ENV / ENV | universal.config 按 production/preview 分组，ENV 来自 NODE_ENV 或 development；server 仅 production 关闭 dev |
-| BACKEND_URL | 各分组默认 https://api.avnpc.com；开发也会访问线上，除非显式覆盖 |
-| FRONTEND_URL | 默认 https://avnpc.com；用于 p 页面跳转，不能认为所有 URL 都随之变化 |
-| PORT | server.js parseInt 后回退 3000，不在通用配置注入对象中 |
-`universal.config.js` 将结果写入 process.env 并导出；`_document.js` 把整个对象嵌入 HTML，写到 window.__ENV__ 与 process.env。这是公开配置，不放令牌、密码或服务端专属字段。
-## EvaEngine 配置
-- `config/config.default.js` 包含日志、Redis、DB 读写、session、token、Swagger 配置；development/production/test 文件提供覆盖项。
-- 可见变量名包括 REDIS_HOST/PORT、DB_PORT/DATABASE、DB_REPLICATION_WRITE_*、DB_REPLICATION_READ0_*、SWAGGER_HOST；本文不记录凭据值。
-- 默认日志位置为 logs/application.log；development 将 logger.file 关闭。实际配置合并优先级与服务连接要求取决于 EvaEngine，未读依赖或运行验证。
-- 环境配置中有模板占位及凭据类字段，不能当作有效的安全生产配置；不要将其默认值复制进新环境。
-## 加载与风险
-- next.config.js 调 dotenv.config；server.js 先加载 universal.config。不要假定只写 .env 就会覆盖已求值的通用配置；启动时序待验证。
-- Git 忽略 .env、config/config.local*、config/sequelize.json；首扫不读其内容。Docker 上下文排除规则不同，见 deploy。
-- BlogPost 有客户端第三方集成配置；后续应单独确认凭据状态/处置，不在文档复制原值。
-- RSS、正文外链与统计部分硬编码；地址切换不能只查 universal.config。
+## 构建配置
+
+- `CONTENT_ROOT` 指向内容仓 `source/`；它只在构建期使用，不写入浏览器 bundle。
+- `FRONTEND_URL` 只供构建期 RSS 链接使用，默认值为 `https://avnpc.com`。
+- Pages 静态产物不读取 `BACKEND_URL`，也不嵌入服务器或数据库凭据。
+- `.env*` 被忽略；不要把 OAuth Secret 或 Cloudflare API token 放入前端环境文件。发布凭据只由 GitHub Actions 与 Cloudflare Worker Secret 管理。
+
 ## 相关
-- 代码：`universal.config.js`、`config/`、`next.config.js`、`server.js`、`pages/_document.js`、`pages/p.js`、`pages/rss.js`。
-- 文档：[环境](../development/setup.md)、[部署](deploy.md)、[UI](../components/components/README.md)。
-验证于：2026-09-17，静态首扫；无密钥文件读取或后端访问。
+
+- 代码：`web/next.config.js`、`web/.env.example`、`web/worker/gitalk-oauth/`。
+- 文档：[环境](../development/setup.md)、[发布](deploy.md)、[现代前端](../development/modern-web.md)。

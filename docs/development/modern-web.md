@@ -33,7 +33,8 @@ GitHub workflow 将前端与 `avnpc.content` checkout 到同一工作目录，�
 - 本轮构建产物检查：`@[toc]` 页面生成目录锚点；示例文章生成 3 个 Mermaid 图表容器；侧栏导航没有图标。构建中 75 篇已发布内容标记开放评论。
 - 2026-09-28 评论接入：Gitalk 1.8.0 经锁文件补丁移除公开 Issue 读取时的 Client Secret Basic Auth；查询覆盖开放与已关闭 Issue，并按创建时间倒序选取标签匹配项。Worker 密钥已部署，GitHub Actions Variables 已设置。全量比对内容仓公开 Issue，为 3 篇文章补齐旧映射，并为没有历史 Issue 的 9 篇文章初始化讨论区。未明确关闭评论的发布文章均可显示评论框。
 - 重复 Issue 仍按最近创建项加载，不合并不同 Issue 的评论；`POST_138` 的 #69 有 1 条历史评论未包含在当前显示的 #90（3 条评论）中。
-- 已运行 `pnpm --dir web lint` 和静态构建；未执行 automated tests 或完整浏览器 OAuth 登录验收。Worker 预检返回 204，使用无效授权码的交换请求返回 GitHub `bad_verification_code`，未产生 access token。部署与既有线上验收证据见总仓 AC-003。
+- 2026-09-28 清理退役 SSR 应用后，将现代应用所用品牌字体迁入 `web/public/fonts/`；Gitalk 的 Axios 与 `follow-redirects` 通过 pnpm overrides 锁定到修复版本。冻结安装、lint、Vitest 15/15、生产静态构建和 `pnpm --dir web audit` 均通过，audit 未报告已知漏洞。
+- 未做完整浏览器 OAuth 登录验收。Worker 预检返回 204，使用无效授权码的交换请求返回 GitHub `bad_verification_code`，未产生 access token。部署与既有线上验收证据见总仓 AC-003。
 - 静态构建不证明 Mermaid 浏览器渲染交互或线上部署后的行为；部署说明见 [发布](../operations/deploy.md)。
 
 ## 仍有功能边界

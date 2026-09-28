@@ -49,13 +49,13 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-          cache-dependency-path: web/pnpm-lock.yaml
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install frontend dependencies
-        run: pnpm --dir web install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build static blog
-        run: pnpm --dir web build
+        run: pnpm build
         env:
           CONTENT_ROOT: ${{ github.workspace }}/avnpc.content/source
           NEXT_PUBLIC_GITALK_CLIENT_ID: ${{ vars.GITALK_CLIENT_ID }}
@@ -72,7 +72,7 @@ jobs:
           CLOUDFLARE_PAGES_PROJECT: ${{ vars.CLOUDFLARE_PAGES_PROJECT }}
 
       - name: Deploy to Cloudflare Pages
-        run: pnpm dlx wrangler@4.136.3 pages deploy web/out --project-name="$CLOUDFLARE_PAGES_PROJECT" --branch="$CF_PAGES_BRANCH"
+        run: pnpm dlx wrangler@4.136.3 pages deploy out --project-name="$CLOUDFLARE_PAGES_PROJECT" --branch="$CF_PAGES_BRANCH"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}

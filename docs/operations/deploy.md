@@ -2,11 +2,11 @@
 
 ## 当前发布链路
 
-目标产物是 Next.js 静态导出 `web/out/`，由 Cloudflare Pages 直接托管；生产域名为 `https://avnpc.com`。
+目标产物是 Next.js 静态导出 `out/`，由 Cloudflare Pages 直接托管；生产域名为 `https://avnpc.com`。
 
 1. 内容仓 `master` 分支 push `source/**` 时，`avnpc.content` workflow dispatch 前端 `deploy-blog.yml`，目标为 production。
-2. 前端 workflow 检出内容仓，使用 Node 24、pnpm 11.22.0，执行 `pnpm --dir web install --frozen-lockfile` 和静态构建。
-3. Wrangler 上传 `web/out/` 到 Cloudflare Pages。手动运行 workflow 默认上传 preview；选择 production 才上传 `master` 生产分支。
+2. 前端 workflow 检出内容仓，使用 Node 24、pnpm 11.22.0，执行 `pnpm install --frozen-lockfile` 和静态构建。
+3. Wrangler 上传 `out/` 到 Cloudflare Pages。手动运行 workflow 默认上传 preview；选择 production 才上传 `master` 生产分支。
 4. 首次关联域名时可在 production run 设置 `bind_domain`；已有关联时不需要重复设置。
 
 ## 配置
@@ -25,4 +25,4 @@
 
 ## 退役代码
 
-原仓库根目录的 Next.js 9/EvaEngine SSR 应用、Docker 镜像和 Travis 发布配置不在此链路中，已按当前实际用途清理。`web/` 是仓库唯一前端应用。
+原仓库根目录的 Next.js 9/EvaEngine SSR 应用、Docker 镜像和 Travis 发布配置不在此链路中，已按当前实际用途清理。仓库根目录是唯一前端应用。

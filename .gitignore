@@ -1,10 +1,13 @@
 node_modules/
 .next/
-web/out/
-web/public/search-index.json
+out/
 .env*
 !.env.example
 .wrangler/
 .DS_Store
 *.log
 npm-debug.log*
+coverage/
+playwright-report/
+test-results/
+public/search-index.json

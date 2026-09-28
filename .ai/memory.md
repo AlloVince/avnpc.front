@@ -4,14 +4,14 @@
 只记：代码与 docs 都表达不好、且影响未来开发的信息。
 不记：架构复述、API 说明、流水账、临时调试、git 能看到的变更列表。
 置信：Confirmed（代码/测试/人确认）| Assumed（待验证，用完升格或删）。
-更新：2026-09-17
+更新：2026-09-28
 
 ## 当前焦点
-- Confirmed：现代前端本地演示待用户查看；入口和未完成验收项见 docs/development/modern-web.md。不能把降级页可用写成完整博客目标完成。
+- Confirmed：2026-09-28 已轮换 GitHub OAuth Secret、部署 Gitalk Worker 并设置 Actions Variables；侧栏、目录、Mermaid 和 Gitalk UI 的生产上线由本轮 Pages 部署完成。8 个无匹配旧 Issue 的处理见 `docs/operations/config.md`。
 
 ## 雷区与禁忌
 - Confirmed：现代化不是重新设计授权。用户要求保留旧版整体布局、配色和风格，不添加口号、格言或无关装饰；仅允许简洁的细节调整。
-- Confirmed：本轮已获前端现代化与本地联调授权，但不含生产部署、外部账号配置或 commit/push。保留根目录旧应用及既有未提交改动。
+- Confirmed：旧 OAuth Secret 曾出现在前端源码历史中，已轮换；不要恢复历史明文或把新 Secret 写入仓库。根目录旧应用只移除硬编码 Secret，保持其他逻辑不变。
 
 ## 调试手册
 

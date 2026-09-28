@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import yaml from 'js-yaml';
 import { fileURLToPath } from 'node:url';
 
@@ -64,6 +65,9 @@ export function getAllPosts() {
     const published = attributes.published !== false;
     const legacyId = attributes.legacy_id ?? attributes.legacyId ?? null;
     const legacyGitalkId = legacyIssues[slug] || (legacyId !== null ? `POST_${legacyId}` : null);
+    const commentId = legacyGitalkId || (slug.length < 50
+      ? slug
+      : `slug-${createHash('sha256').update(slug).digest('hex').slice(0, 40)}`);
     return {
       slug,
       title: String(attributes.title),
@@ -76,6 +80,7 @@ export function getAllPosts() {
       categories: asArray(attributes.categories || attributes.category),
       commentStatus: attributes.comment_status === 'open' || attributes.comments === true || Boolean(legacyIssues[slug]) ? 'open' : 'closed',
       legacyGitalkId,
+      commentId,
     };
   });
 

@@ -1,5 +1,6 @@
 import localFont from 'next/font/local';
 import Sidebar from '../components/Sidebar';
+import 'gitalk/dist/gitalk.css';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 

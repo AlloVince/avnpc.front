@@ -77,7 +77,7 @@ export default class extends React.Component {
       script.text = `
     (new Gitalk({
       clientID: '5d9637564dd639b523c6',
-      clientSecret: '8946007888a18d7c4bd4bef28128866394ff86b8',
+      clientSecret: '',
       repo: 'avnpc.content',
       owner: 'AlloVince',
       admin: ['AlloVince'],

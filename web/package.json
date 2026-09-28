@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@traptitech/markdown-it-katex": "^3.6.0",
+    "gitalk": "1.8.0",
     "highlight.js": "^11.12.0",
     "js-yaml": "4.3.2",
     "katex": "^0.18.7",
@@ -27,6 +28,7 @@
     "markdown-it-footnote": "^4.0.0",
     "markdown-it-sub": "^2.0.0",
     "markdown-it-sup": "^2.0.0",
+    "mermaid": "^11.17.2",
     "next": "16.3.5",
     "react": "19.3.0",
     "react-dom": "19.3.0",

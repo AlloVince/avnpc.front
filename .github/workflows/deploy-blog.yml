@@ -58,6 +58,8 @@ jobs:
         run: pnpm --dir web build
         env:
           CONTENT_ROOT: ${{ github.workspace }}/avnpc.content/source
+          NEXT_PUBLIC_GITALK_CLIENT_ID: ${{ vars.GITALK_CLIENT_ID }}
+          NEXT_PUBLIC_GITALK_OAUTH_PROXY: ${{ vars.GITALK_OAUTH_PROXY }}
 
       - name: Check Cloudflare configuration
         run: |

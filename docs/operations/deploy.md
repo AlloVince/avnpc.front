@@ -21,7 +21,7 @@
 
 ## 已验收状态
 
-2026-09-28 Pages 项目 `avnpc-blog` 与 `avnpc.com` custom domain 状态为 active。内容 push 触发生产 workflow 成功；生产构建、Pages 上传以及首页、旧文章、迁移文章、RSS、robots、sitemap、search index 和隐藏文章 HTTP 检查通过。当前前端最新生产部署 run 为 `36425135398`，提交 `4358827`；首页、代表文章、RSS、robots、favicon 与新字体资源均返回 HTTP 200。`www.avnpc.com` 未配置，当前入口只承诺 apex 域名。
+2026-09-28 Pages 项目 `avnpc-blog` 与 `avnpc.com` custom domain 状态为 active。内容 push 触发生产 workflow 成功；生产构建、Pages 上传以及首页、旧文章、迁移文章、RSS、robots、sitemap、search index 和隐藏文章 HTTP 检查通过。当前前端最新生产部署 run 为 `36427792577`，提交 `2a02b64`；首页、代表文章、RSS、robots、sitemap、search index、favicon 与新字体资源均返回 HTTP 200。`www.avnpc.com` 未配置，当前入口只承诺 apex 域名。
 
 ## 退役代码
 

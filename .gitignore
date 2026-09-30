@@ -8,6 +8,4 @@ out/
 *.log
 npm-debug.log*
 coverage/
-playwright-report/
-test-results/
 public/search-index.json
